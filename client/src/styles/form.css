@@ -1,0 +1,44 @@
+form .input-box {
+    position: relative;
+}
+
+label {
+    display: block;
+    color: var(--color-black);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.214px;
+    margin-bottom: 1rem;
+}
+
+input, select {
+    font-size: inherit;
+    font-weight: bold;
+    width: 90%;
+    padding: 1.8rem 0 1.8rem 2.4rem;
+    margin-bottom: 2.4rem;
+    border: 1px solid #CFCFCF;
+    border-radius: var(--border-radius-8);
+}
+
+.error {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #CD2C2C;
+}
+
+.error-input {
+    border: 1px solid #CD2C2C;
+}
+
+textarea {
+    font-size: inherit;
+    font-weight: bold;
+    width: 90%;
+    padding: 1.8rem 0 1.8rem 2.4rem;
+    height: 12rem;
+    margin-bottom: 2.4rem;
+    margin-top: 1rem;
+    border: 1px solid #CFCFCF;
+    border-radius: var(--border-radius-8);
+}

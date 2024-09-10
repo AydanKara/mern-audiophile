@@ -1,0 +1,48 @@
+/* responsive */
+
+/* @media (max-width: 768px) {
+    #product-2 {
+        background: url(../../home/tablet/image-speaker-zx7.jpg) no-repeat right;
+    }
+
+    #product-2-content {
+        padding-left: 6.2rem;
+    }
+
+    .product-3-col {
+        padding-left: 4.1rem;
+    }
+
+    .product-3-img {
+        background: url(../../home/tablet/image-earphones-yx1.jpg) no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    #shop-info {
+        margin-bottom: 9.6rem;
+    }
+
+    #shop-info-wrapper {
+        height: 63.3rem;
+        flex-direction: column-reverse;
+        gap: 6.3rem;
+        text-align: center;
+    }
+
+    .shop-info-col {
+        width: 100%;
+        flex-direction: unset;
+        justify-content: center;
+    }
+
+    #shop-info-content {
+        max-width: 57.3rem;
+    }
+
+    .shop-info-col-bg {
+        background: url(../../shared/tablet/image-best-gear.jpg) no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+} */

@@ -1,0 +1,25 @@
+.category-heading {
+    width: 100%;
+    height: 23.9rem;
+    background-color: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading-title {
+    color: var(--color-white);
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 4.4rem;
+    letter-spacing: 1.429px;
+    text-transform: uppercase;
+}
+
+.products-categories {
+    margin: 24rem 0 16rem 0;
+}
+
+#shop-info {
+    margin-bottom: 16rem;
+}
