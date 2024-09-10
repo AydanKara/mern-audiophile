@@ -1,5 +1,5 @@
 <h1>Audiophile E-Commerce Platform</h1>
-<p>Audiophile is a cutting-edge e-commerce platform developed as a Single Page Application (SPA) using React.js, dedicated to offering an unparalleled online shopping experience for high-end audio enthusiasts. The project utilizes the SoftUni Practice Server, a REST service created for educational purposes, to manage backend operations.</p>
+<p>Audiophile is a cutting-edge e-commerce platform developed as a Single Page Application (SPA) using React.js, dedicated to offering an unparalleled online shopping experience for high-end audio enthusiasts.</p>
 <br>
 
 <h2>Description</h2>
@@ -57,16 +57,19 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/AydanKara/Audiophile-E-commerce-Project.git
+git clone https://github.com/AydanKara/mern-audiophile.git
 ```
 2. Start the Backend Server: <br>
    2.1 Open a terminal and navigate to the server directory
    ```bash
-   cd server
+   cd backend
    ```
-   2.2 Start the server
+   2.1 Install dependencies
    ```bash
-   node server.js
+   npm install
+   2.3 Start the server
+   ```bash
+   node index.js
    ```
 
 3. Start the Frontend: <br>
