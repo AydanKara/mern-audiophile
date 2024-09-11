@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 import "../styles/form.css";
-import { useContext, useState } from "react";
-import AuthContext from "../context/authContext";
-import useLoginForm from "../hooks/useLoginForm";
+import { useState } from "react";
+/* import AuthContext from "../context/authContext";
+import useLoginForm from "../hooks/useLoginForm"; */
 
 const LoginPage = () => {
   /*   const { loginSubmitHandler } = useContext(AuthContext);
   const { values, errors, serverError, onChange, onSubmit } =
     useLoginForm(loginSubmitHandler); */
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -22,27 +25,42 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      setLoading(true);
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await res.json();
-    console.log(data);
+      console.log(res)
+      const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        setError(data.message);
+        return;
+      }
+      setLoading(false);
+      setError(null);
+      navigate("/");
+      
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
   };
   return (
     <>
       <div className="site-heading">
         <h1 className="heading-title">Login</h1>
       </div>
-      {/*  {serverError && (
+      {error && (
         <div className="alert">
-          <h2>{serverError}</h2>
+          <h2>{error}</h2>
         </div>
-      )} */}
+      )}
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="email">E-Mail</label>
@@ -80,7 +98,7 @@ const LoginPage = () => {
           />
         </p>
         <button type="submit" className="btn-1">
-          Login
+          {loading ? "Loading..." : "Login"}
         </button>
         <p className="btn-2 auth">
           <Link to="/register">Create a new user</Link>
