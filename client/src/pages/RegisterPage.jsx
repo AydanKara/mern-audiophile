@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 import "../styles/form.css";
 import { useState } from "react";
+import Oauth from "../components/OAuth/Oauth";
 /* import AuthContext from "../context/authContext";
 import useRegisterForm from "../hooks/useRegisterForm"; */
 
@@ -117,6 +118,7 @@ const RegisterPage = () => {
         <button disabled={loading} type="submit" className="btn-1">
           {loading ? "Loading..." : "Create Account"}
         </button>
+        <Oauth />
         <p className="btn-2 auth">
           <Link to="/login">Login instead</Link>
           <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />

@@ -124,6 +124,7 @@ p {
 
 .btn-1 {
     width: fit-content;
+    margin: 1rem 5rem;
     padding: 1.5rem 3rem;
     color: var(--color-white);
     background-color: var(--color-orange);
