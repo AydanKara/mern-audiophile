@@ -42,3 +42,13 @@ textarea {
     border: 1px solid #CFCFCF;
     border-radius: var(--border-radius-8);
 }
+
+.profile-actions {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-actions span {
+    color: #CD2C2C;
+}
