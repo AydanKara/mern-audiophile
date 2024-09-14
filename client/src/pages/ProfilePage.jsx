@@ -120,6 +120,7 @@ const ProfilePage = () => {
                 type="email"
                 name="email"
                 id="email"
+                defaultValue={currentUser.email}
                 onChange={handleChange}
 
                 /* className={errors.email ? "error-input" : ""} */
@@ -133,6 +134,7 @@ const ProfilePage = () => {
                 type="text"
                 name="username"
                 id="username"
+                defaultValue={currentUser.username}
                 onChange={handleChange}
 
                 /* className={errors.username ? "error-input" : ""} */
