@@ -18,6 +18,7 @@ html {
     --color-background: #fafafa;
     --color-background-error: #da9999;
     --color-form-error: #CD2C2C;
+    --color-form-success: #26a909;
 
     --border-radius-8: 8px;
 }

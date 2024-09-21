@@ -10,6 +10,12 @@ import "../styles/profile-page.css";
 // import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+} from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 const ProfilePage = () => {
   // const { userId, isAuthenticated, username } = useContext(AuthContext);
@@ -86,13 +92,13 @@ const ProfilePage = () => {
       ]
   }); */
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const { currentUser } = useSelector((state) => state.user);
-
-  
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({
@@ -101,9 +107,28 @@ const ProfilePage = () => {
     });
   };
 
-  const handleSubmit = () => {
-
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
+  };
 
   return (
     <main>
@@ -169,6 +194,10 @@ const ProfilePage = () => {
             <button disabled={loading} type="submit" className="btn-1">
               {loading ? "Loading..." : "Update"}
             </button>
+            {error && <p className="error">{error}</p>}
+            {updateSuccess && (
+              <p className="success">User is updated Successfully!</p>
+            )}
             <div className="profile-actions">
               <span className="btn-2">Delete Account</span>
               <span className="btn-2">Sign out</span>
