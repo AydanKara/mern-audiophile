@@ -14,6 +14,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
@@ -130,6 +133,23 @@ const ProfilePage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   return (
     <main>
       <div className="site-heading">
@@ -199,7 +219,9 @@ const ProfilePage = () => {
               <p className="success">User is updated Successfully!</p>
             )}
             <div className="profile-actions">
-              <span className="btn-2">Delete Account</span>
+              <span onClick={handleDelete} className="btn-2">
+                Delete Account
+              </span>
               <span className="btn-2">Sign out</span>
             </div>
           </form>
