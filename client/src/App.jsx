@@ -18,6 +18,8 @@ import CatalogCategoryPage from "./pages/CatalogCategoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import ContactPage from "./pages/ContactPage";
 import { ContactProvider } from "./context/contactContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function App() {
 
             <Route path="*" element={<ErrorPage />} />
           </Routes>
+          <ToastContainer />
           <Footer />
         </ContactProvider>
       </AuthProvider>

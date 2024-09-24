@@ -2,7 +2,7 @@ import { validationResult } from "express-validator";
 
 export const validateRequest = (req, res, next) => {
   const validation = validationResult(req);
-  console.log(validation)
+  
   if (validation.errors.length) {
     // Map errors to have a 'field' and 'message' format
     const extractedErrors = validation.array().map((err) => ({

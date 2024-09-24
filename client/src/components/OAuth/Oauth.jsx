@@ -3,6 +3,7 @@ import { app } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { notifySuccess } from "../../utils/toastNotifications";
 
 const Oauth = () => {
   const navigate = useNavigate();
@@ -28,12 +29,17 @@ const Oauth = () => {
       const data = await res.json();
       dispatch(signInSuccess(data));
       navigate("/");
+      notifySuccess("You are now signed in");
     } catch (error) {
       console.log("Could not connect to Google", error);
     }
   };
   return (
-    <button onClick={handleGoogleClick} type="button" className="btn-1">
+    <button
+      onClick={handleGoogleClick}
+      type="button"
+      className="btn-1 btn-alt-3"
+    >
       Continue with Google
     </button>
   );

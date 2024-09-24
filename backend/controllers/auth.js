@@ -4,21 +4,44 @@ import jwt from "jsonwebtoken";
 import { errorHandler } from "../utils/error.js";
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { email, username, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  const newUser = new User({ username, email, password: hashedPassword });
+  const newUser = new User({ email, username, password: hashedPassword });
   try {
     await newUser.save();
     res.status(201).json("User created successfully.");
   } catch (error) {
+    console.log(error.code);
+    // Handle validation errors
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: Object.keys(error.errors).map((key) => ({
+          field: key,
+          message: error.errors[key].message,
+        })),
+      });
+    }
+    // Check if it's a MongoDB duplicate key error
+    if (error.code === 11000) {
+      // Assuming 'email' is the duplicate field
+      return res.status(400).json({
+        success: false,
+        message: "Email already exists.",
+        errors: [
+          { field: "email", message: "This email is already registered." },
+        ],
+      });
+    }
     next(error);
   }
 };
 
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
-  
+
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) return next(errorHandler(404, "User not found!"));

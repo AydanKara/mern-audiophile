@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 
 export const registerChain = () => [
-  check("name")
+  check("username")
     .trim()
     .isLength({ min: 2, max: 20 })
     .withMessage("Username should be between 2 and 20 characters long"),
