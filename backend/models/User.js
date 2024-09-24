@@ -2,14 +2,14 @@ import { Schema, model } from "mongoose";
 
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
       unique: true,
+    },
+    username: {
+      type: String,
+      required: true,
     },
     password: {
       type: String,
@@ -19,6 +19,11 @@ const userSchema = new Schema(
       type: String,
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   { timestamps: true }
