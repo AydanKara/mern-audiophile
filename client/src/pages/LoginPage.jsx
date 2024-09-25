@@ -1,38 +1,46 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import Oauth from "../components/OAuth/Oauth.jsx";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signInStart,
   signInSuccess,
   signInFailure,
+  clearFieldError,
+  clearAllErrors,
 } from "../redux/user/userSlice.js";
+import Oauth from "../components/OAuth/Oauth.jsx";
+import { notifyError, notifySuccess } from "../utils/toastNotifications.js";
 import "../styles/auth.css";
 import "../styles/form.css";
-/* import AuthContext from "../context/authContext";
-import useLoginForm from "../hooks/useLoginForm"; */
 
 const LoginPage = () => {
-  /*   const { loginSubmitHandler } = useContext(AuthContext);
-  const { values, errors, serverError, onChange, onSubmit } =
-    useLoginForm(loginSubmitHandler); */
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
 
   const { loading, error } = useSelector((state) => state.user);
 
+  useEffect(() => {
+    // Clear all errors when the component mounts (e.g., page refresh)
+    dispatch(clearAllErrors());
+  }, [dispatch]);
+
   const handleChange = (e) => {
     e.preventDefault();
+    const { name, value } = e.target;
+
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [name]: value,
     });
+
+    // Dispatch action to clear specific field error
+    dispatch(clearFieldError(name));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
@@ -43,62 +51,60 @@ const LoginPage = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log(res);
       const data = await res.json();
+
+      // Handle field-specific validation errors
+      if (data.errors) {
+        const errors = data.errors.reduce((acc, error) => {
+          acc[error.field] = error.message;
+          return acc;
+        }, {});
+        dispatch(signInFailure(errors));
+        return;
+      }
+
       if (data.success === false) {
+        notifyError(data.message || "Login failed! Wrong credentials.");
         dispatch(signInFailure(data.message));
         return;
       }
+
       dispatch(signInSuccess(data));
       navigate("/");
+      notifySuccess("You are now signed in");
     } catch (err) {
+      notifyError(error || "Something went wrong! Please try again.");
       dispatch(signInFailure(err.message));
     }
   };
+
   return (
     <>
       <div className="site-heading">
         <h1 className="heading-title">Login</h1>
       </div>
-      {error && (
-        <div className="alert">
-          <h2>{error}</h2>
-        </div>
-      )}
+
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="email">E-Mail</label>
-          {/* {errors.email && <span className="error">{errors.email}</span>} */}
+          {error?.email && <span className="error">{error.email}</span>}
           <input
             type="email"
             name="email"
             id="email"
+            className={error?.email ? "error-input" : ""}
             onChange={handleChange}
-
-            /* className={
-              errors.email
-                ? "error-input"
-                : "" || serverError
-                ? "error-input"
-                : ""
-            } */
           />
         </p>
         <p>
           <label htmlFor="password">Password</label>
-          {/* {errors.password && <span className="error">{errors.password}</span>} */}
+          {error?.password && <span className="error">{error.password}</span>}
           <input
             type="password"
             name="password"
             id="password"
+            className={error?.password ? "error-input" : ""}
             onChange={handleChange}
-            /* className={
-              errors.password
-                ? "error-input"
-                : "" || serverError
-                ? "error-input"
-                : ""
-            } */
           />
         </p>
         <button type="submit" className="btn-1">

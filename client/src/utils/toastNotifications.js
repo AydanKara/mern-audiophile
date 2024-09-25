@@ -15,3 +15,9 @@ export const notifySuccess = (message) => {
     className: "custom-toast",
   });
 };
+
+export const notifyInfo = (message) => {
+  toast.info(message, {
+    className: "custom-toast",
+  });
+};

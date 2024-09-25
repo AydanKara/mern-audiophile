@@ -1,6 +1,8 @@
 .custom-toast {
-    font-size: 1.2rem !important;
-    font-weight: bold;
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 1.4rem !important;
+    font-weight: bold !important;
+    letter-spacing: 1px;
 }
 
 .custom-toast-body {

@@ -20,6 +20,7 @@ import ContactPage from "./pages/ContactPage";
 import { ContactProvider } from "./context/contactContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/toastify-custom.css";
 
 function App() {
   return (
