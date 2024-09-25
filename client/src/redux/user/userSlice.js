@@ -22,6 +22,10 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    signUpSuccess: (state) => {
+      state.error = null;
+      state.loading = false;
+    },
     updateUserStart: (state) => {
       state.loading = true;
     },
@@ -58,6 +62,15 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    clearFieldError: (state, action) => {
+      if (state.error && state.error[action.payload]) {
+        // Clear specific field error
+        delete state.error[action.payload];
+      }
+    },
+    clearAllErrors: (state) => {
+      state.error = null; // Clear all errors (useful for refresh)
+    },
   },
 });
 
@@ -65,6 +78,7 @@ export const {
   signInStart,
   signInSuccess,
   signInFailure,
+  signUpSuccess,
   updateUserFailure,
   updateUserSuccess,
   updateUserStart,
@@ -74,6 +88,8 @@ export const {
   signOutUserStart,
   signOutUserSuccess,
   signOutUserFailure,
+  clearFieldError,
+  clearAllErrors,
 } = userSlice.actions;
 
 export default userSlice.reducer;
