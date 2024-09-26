@@ -3,12 +3,14 @@ import { deleteUser, test, updateUser } from "../controllers/user.js";
 import { verifyToken } from "../middlewares/verifyUser.js";
 import { updateChain } from "../middlewares/validationChains.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
+import checkObjectId from "../middlewares/checkObjectId.js";
 
 const router = express.Router();
 
 router.get("/test", test);
 router.post(
   "/update/:id",
+  checkObjectId,
   verifyToken,
   updateChain(),
   validateRequest,
