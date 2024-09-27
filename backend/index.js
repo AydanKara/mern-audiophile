@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
@@ -25,6 +26,14 @@ const app = express();
 app.use(express.json());
 
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Frontend URL
+    credentials: true, // Allow sending cookies across domains
+  })
+);
 
 app.get("/", (req, res) => res.send("Server running"));
 
