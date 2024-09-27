@@ -21,6 +21,10 @@ import { ContactProvider } from "./context/contactContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/toastify-custom.css";
+import AdminGuard from "./guard/AdminGuard";
+import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
+import AdminLayout from "./components/Layouts/Admin/AdminLayout";
+import AdminCreateCategoryPage from "./pages/admin/AdminCreateCategoryPage";
 
 function App() {
   return (
@@ -50,6 +54,13 @@ function App() {
               <Route path="/catalog/:productId/edit" element={<EditPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/logout" element={<Logout />} />
+            </Route>
+
+            <Route element={<AdminGuard />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="categories" element={<AdminCategoryPage />} />
+                <Route path="categories/create" element={<AdminCreateCategoryPage />} />
+              </Route>
             </Route>
 
             <Route path="*" element={<ErrorPage />} />
