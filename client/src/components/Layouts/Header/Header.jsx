@@ -1,11 +1,8 @@
 import { NavLink } from "react-router-dom";
-// import { useContext } from "react";
-// import AuthContext from "../../../context/authContext";
 import { useSelector } from "react-redux";
 import "./Header.css";
 
 const Header = () => {
-  // const { isAuthenticated } = useContext(AuthContext);
   const { currentUser } = useSelector((state) => state.user);
   return (
     <header>
@@ -40,16 +37,20 @@ const Header = () => {
                   Contact
                 </NavLink>
               </li>
-              {currentUser && (
+              {currentUser?.isAdmin && (
                 <>
                   <li className="nav-item">
                     <NavLink
-                      to="/create"
+                      to="/admin"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
-                      Create
+                      Admin
                     </NavLink>
                   </li>
+                </>
+              )}
+              {currentUser && (
+                <>
                   <li className="nav-item">
                     <NavLink
                       to="/profile"

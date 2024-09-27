@@ -46,7 +46,6 @@ nav {
 }
 
 .nav-item:hover, .active {
-    font-size: 1.4rem;
     color: var(--color-orange);
 }
 
