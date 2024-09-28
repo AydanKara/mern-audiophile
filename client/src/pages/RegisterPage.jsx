@@ -84,7 +84,7 @@ const RegisterPage = () => {
         <h1 className="heading-title">Create new Account</h1>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <p className="input-box">
           <label htmlFor="email">E-Mail</label>
           {error?.email && <span className="error">{error.email}</span>}

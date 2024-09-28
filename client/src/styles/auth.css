@@ -16,7 +16,7 @@
     text-transform: uppercase;
 }
 
-form {
+.form {
     max-width: 54rem;
     margin: 10rem auto;
     padding: 4.8rem;

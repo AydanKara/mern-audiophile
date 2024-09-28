@@ -42,7 +42,7 @@ export const getCategoryById = async (req, res, next) => {
 };
 
 // Update
-export const updateCategory = async (req, res) => {
+export const updateCategory = async (req, res, next) => {
   try {
     const categoryId = req.params.id;
     const updates = req.body;
@@ -67,7 +67,7 @@ export const updateCategory = async (req, res) => {
 
 //! Delete
 
-export const deleteCategory = async (req, res) => {
+export const deleteCategory = async (req, res, next) => {
   try {
     const categoryId = req.params.id;
     const deletedCategory = await Category.findByIdAndDelete(categoryId);

@@ -125,7 +125,7 @@ const ProfilePage = () => {
       </div>
       <section className="container">
         <div className="profile-section-wrapper">
-          <form onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
             <p className="input-box">
               <label htmlFor="email">E-Mail</label>
               {error?.email && <span className="error">{error.email}</span>}
