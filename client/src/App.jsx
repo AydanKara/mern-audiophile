@@ -5,7 +5,6 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreatePage from "./pages/CreatePage";
-import "./styles/base.css";
 import { AuthProvider } from "./context/authContext";
 import Header from "./components/Layouts/Header/Header";
 import Footer from "./components/Layouts/Footer/Footer";
@@ -19,12 +18,16 @@ import ProfilePage from "./pages/ProfilePage";
 import ContactPage from "./pages/ContactPage";
 import { ContactProvider } from "./context/contactContext";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./styles/toastify-custom.css";
 import AdminGuard from "./guard/AdminGuard";
 import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
 import AdminLayout from "./components/Layouts/Admin/AdminLayout";
-import AdminCreateCategoryPage from "./pages/admin/AdminCreateCategoryPage";
+import AdminProductCreatePage from "./pages/admin/AdminProductCreatePage";
+import "./styles/base.css";
+import "react-toastify/dist/ReactToastify.css";
+import "./styles/toastify-custom.css";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
+import AdminProductEditPage from "./pages/admin/AdminProductEditPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
 
 function App() {
   return (
@@ -59,7 +62,16 @@ function App() {
             <Route element={<AdminGuard />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route path="categories" element={<AdminCategoryPage />} />
-                <Route path="categories/create" element={<AdminCreateCategoryPage />} />
+                <Route path="products" element={<AdminProductsPage />} />
+                <Route
+                  path="products/create"
+                  element={<AdminProductCreatePage />}
+                />
+                <Route
+                  path="products/edit/:id"
+                  element={<AdminProductEditPage />}
+                />
+                <Route path="users" element={<AdminUsersPage />} />
               </Route>
             </Route>
 

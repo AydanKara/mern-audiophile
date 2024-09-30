@@ -1,8 +1,23 @@
 import express from "express";
-import { createProduct } from "../controllers/product.js";
+import {
+  createProduct,
+  deleteProductById,
+  getAllProducts,
+  getProductById,
+  updateProductById,
+} from "../controllers/product.js";
 import { verifyToken } from "../middlewares/verifyUser.js";
+import { verifyAdmin } from "../middlewares/verifyAdmin.js";
+import checkObjectId from "../middlewares/checkObjectId.js";
 
 const router = express.Router();
+
+router.get("/", getAllProducts);
+router
+  .route("/:id")
+  .get(checkObjectId, getProductById)
+  .put(checkObjectId, verifyToken, verifyAdmin, updateProductById)
+  .delete(checkObjectId, verifyToken, verifyAdmin, deleteProductById);
 
 router.post("/create", verifyToken, createProduct);
 
