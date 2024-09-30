@@ -2,10 +2,13 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import { errorHandler } from "../utils/error.js";
 
-export const test = (req, res) => {
-  res.json({
-    message: "Hello world...",
-  });
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().select("-password");
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const updateUser = async (req, res, next) => {
@@ -35,6 +38,23 @@ export const updateUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateAdminStatus = async (req, res, next) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body, // Only update fields present in the body
+      },
+      { new: true }
+    ).select("-password");
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)

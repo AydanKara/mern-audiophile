@@ -57,4 +57,8 @@ textarea {
     color: #26a909;
 }
 
+.form-col {
+    flex: 50%;
+}
+
 

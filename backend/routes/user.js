@@ -2,6 +2,7 @@ import express from "express";
 import {
   deleteUser,
   getAllUsers,
+  updateAdminStatus,
   updateUser,
 } from "../controllers/user.js";
 import { verifyToken } from "../middlewares/verifyUser.js";
@@ -13,14 +14,10 @@ import { verifyAdmin } from "../middlewares/verifyAdmin.js";
 const router = express.Router();
 
 router.get("/", verifyToken, verifyAdmin, getAllUsers);
-router.post(
-  "/update/:id",
-  checkObjectId,
-  verifyToken,
-  updateChain(),
-  validateRequest,
-  updateUser
-);
+router
+  .route("/update/:id")
+  .patch(checkObjectId, verifyToken, verifyAdmin, updateAdminStatus)
+  .post(checkObjectId, verifyToken, updateChain(), validateRequest, updateUser);
 router.delete("/delete/:id", verifyToken, deleteUser);
 
 export default router;
