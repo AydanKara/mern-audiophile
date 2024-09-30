@@ -7,11 +7,13 @@ import {
   Form,
   Input,
   Spin,
+  Row,
+  Col,
 } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
 const AdminCategoryPage = () => {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL; // Your API base URL
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [dataSource, setDataSource] = useState([]);
   const [form] = Form.useForm();
   const [editingCategory, setEditingCategory] = useState(null); // State for editing category
@@ -22,7 +24,14 @@ const AdminCategoryPage = () => {
       title: "Image",
       dataIndex: "img",
       key: "img",
-      render: (imgSrc) => <img src={imgSrc} alt="Image" width={100} />,
+      render: (imgSrc) => (
+        <img
+          src={imgSrc}
+          alt="Category"
+          width={80}
+          style={{ borderRadius: "5px", border: "1px solid #f0f0f0" }}
+        />
+      ),
     },
     {
       title: "Name",
@@ -41,7 +50,7 @@ const AdminCategoryPage = () => {
           </Button>
           <Popconfirm
             title="Delete the category"
-            description="Are you sure to delete this category?"
+            description="Are you sure you want to delete this category?"
             onConfirm={() => deleteCategory(record._id)}
             okText="Yes"
             cancelText="No"
@@ -107,7 +116,7 @@ const AdminCategoryPage = () => {
           form.resetFields();
           fetchCategories(); // Refresh the list of categories
         } else {
-          message.error("Failed to update coupon.");
+          message.error("Failed to update category.");
         }
       } else {
         const response = await fetch(`${apiUrl}/api/category/create`, {
@@ -150,70 +159,90 @@ const AdminCategoryPage = () => {
   }, [fetchCategories]); // Use fetchCategories as a dependency
 
   return (
-    <>
-      <Spin spinning={loading}>
+    <Spin spinning={loading}>
+      <div
+        style={{
+          maxWidth: 800,
+          margin: "auto",
+          padding: "40px",
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>
+          {editingCategory ? "Edit Category" : "Create Category"}
+        </h2>
         <Form
           form={form}
           name="basic"
-          layout="inline"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            margin: "1rem 0",
-          }}
-          initialValues={{
-            remember: true,
-          }}
-          autoComplete="off"
+          layout="vertical"
           onFinish={onFinish}
+          autoComplete="off"
         >
-          <Form.Item
-            label="Category name"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Please input category name!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item
+                label="Category Name"
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input category name!",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter category name" />
+              </Form.Item>
+            </Col>
 
-          <Form.Item
-            label="Image (Url)"
-            name="img"
-            rules={[
-              {
-                required: true,
-                message: "Please input image url",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+            <Col span={12}>
+              <Form.Item
+                label="Image URL"
+                name="img"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input image URL!",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter image URL" />
+              </Form.Item>
+            </Col>
+          </Row>
 
-          <Button type="primary" htmlType="submit">
-            {editingCategory ? "Update Category" : "Create Category"}
-          </Button>
-          {editingCategory && (
-            <Button onClick={onCancelEdit} style={{ marginLeft: "8px" }}>
-              Cancel
+          <div style={{ textAlign: "right" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginRight: "8px" }}
+            >
+              {editingCategory ? "Update Category" : "Create Category"}
             </Button>
-          )}
+            {editingCategory && <Button onClick={onCancelEdit}>Cancel</Button>}
+          </div>
         </Form>
-      </Spin>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        rowKey={(record) => record._id}
-        loading={loading}
-      />
-    </>
+      </div>
+
+      <div
+        style={{
+          marginTop: "20px",
+          backgroundColor: "#fff",
+          padding: "20px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          rowKey={(record) => record._id}
+          loading={loading}
+          pagination={{ pageSize: 5 }}
+        />
+      </div>
+    </Spin>
   );
 };
 

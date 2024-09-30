@@ -2,3 +2,6 @@
     margin: 15.4rem 0 16.8rem 0;
 }
 
+.ant-spin-dot.ant-spin-dot-spin {
+    color: var(--color-orange) !important;
+}

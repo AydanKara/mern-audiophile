@@ -16,8 +16,8 @@ router.get("/", getAllCategories);
 router
   .route("/:id")
   .get(checkObjectId, getCategoryById)
-  .put(verifyToken, verifyAdmin, updateCategory)
-  .delete(verifyToken, verifyAdmin, deleteCategory);
+  .put(checkObjectId, verifyToken, verifyAdmin, updateCategory)
+  .delete(checkObjectId, verifyToken, verifyAdmin, deleteCategory);
 
 router.post("/create", verifyToken, verifyAdmin, createCategory);
 

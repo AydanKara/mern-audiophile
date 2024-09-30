@@ -4,7 +4,6 @@ import { Layout, Menu } from "antd";
 import {
   UserOutlined,
   LaptopOutlined,
-  BarcodeOutlined,
   DashboardOutlined,
   ShoppingCartOutlined,
   AppstoreOutlined,
@@ -46,16 +45,6 @@ const AdminLayout = () => {
       icon: <AppstoreOutlined />,
       label: "Categories",
       path: "/admin/categories",
-      children: [
-        {
-          key: "3",
-          label: "Create new category",
-          path: "/admin/categories/create",
-          onClick: () => {
-            navigate("/admin/categories/create");
-          },
-        },
-      ],
       onClick: () => {
         navigate(`/admin/categories`);
       },
@@ -83,15 +72,6 @@ const AdminLayout = () => {
           },
         },
       ],
-    },
-    {
-      key: "7",
-      icon: <BarcodeOutlined />,
-      label: "Coupons",
-      path: "/admin/coupons",
-      onClick: () => {
-        navigate(`/admin/coupons`);
-      },
     },
     {
       key: "8",
