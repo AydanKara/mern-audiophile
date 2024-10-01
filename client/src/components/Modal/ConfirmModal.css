@@ -24,7 +24,9 @@
 }
 
 .modal-buttons {
-    margin-top: 1rem;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-delete {
@@ -32,4 +34,3 @@
     color: white;
     margin-right: 1rem;
 }
-

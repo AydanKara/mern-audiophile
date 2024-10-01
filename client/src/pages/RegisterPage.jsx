@@ -72,7 +72,7 @@ const RegisterPage = () => {
       }
       dispatch(signUpSuccess());
       navigate("/login");
-      notifyInfo("You can now login with your email and password")
+      notifyInfo("You can now login with your email and password");
     } catch (err) {
       dispatch(signInFailure(err.message));
     }
@@ -129,10 +129,13 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
         </p>
-        <button disabled={loading} type="submit" className="btn-1">
-          {loading ? "Loading..." : "Create Account"}
-        </button>
-        <Oauth />
+        <div className="form-actions">
+          <button disabled={loading} type="submit" className="btn-1 auth-btn">
+            {loading ? "Loading..." : "Create Account"}
+          </button>
+          <Oauth />
+        </div>
+
         <p className="btn-2 auth">
           <Link to="/login">Login instead</Link>
           <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />

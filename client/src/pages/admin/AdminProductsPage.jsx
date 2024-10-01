@@ -107,7 +107,7 @@ const AdminProductPage = () => {
         dataSource={dataSource}
         columns={columns}
         rowKey={(record) => record._id}
-        pagination={{ pageSize: 10 }}
+        pagination={{ pageSize: 5 }}
       />
     </Spin>
   );

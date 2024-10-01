@@ -11,7 +11,8 @@ label {
     margin-bottom: 1rem;
 }
 
-input, select {
+input,
+select {
     font-size: inherit;
     font-weight: bold;
     width: 90%;
@@ -61,4 +62,14 @@ textarea {
     flex: 50%;
 }
 
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
 
+.auth-btn {
+    width: 90% !important;
+    border-radius: var(--border-radius-8);
+}

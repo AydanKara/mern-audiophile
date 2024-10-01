@@ -107,10 +107,13 @@ const LoginPage = () => {
             onChange={handleChange}
           />
         </p>
-        <button type="submit" className="btn-1">
-          {loading ? "Loading..." : "Login"}
-        </button>
-        <Oauth />
+        <div className="form-actions">
+          <button type="submit" className="btn-1 auth-btn">
+            {loading ? "Loading..." : "Login"}
+          </button>
+          <Oauth />
+        </div>
+
         <p className="btn-2 auth">
           <Link to="/register">Create a new user</Link>
           <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />

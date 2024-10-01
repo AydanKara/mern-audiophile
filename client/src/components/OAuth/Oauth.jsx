@@ -38,7 +38,7 @@ const Oauth = () => {
     <button
       onClick={handleGoogleClick}
       type="button"
-      className="btn-1 btn-alt-3"
+      className="btn-1 btn-alt-3 auth-btn"
     >
       Continue with Google
     </button>

@@ -124,8 +124,8 @@ p {
 }
 
 .btn-1 {
+    display: block;
     width: fit-content;
-    margin: 1rem 5rem;
     padding: 1.5rem 3rem;
     color: var(--color-white);
     background-color: var(--color-orange);
@@ -143,6 +143,7 @@ button {
 .btn-1:hover,
 .btn-1:active {
     background-color: var(--color-orange-hover);
+    color: var(--color-white);
 }
 
 .btn-2 {
