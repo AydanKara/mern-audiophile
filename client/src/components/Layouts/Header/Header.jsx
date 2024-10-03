@@ -1,9 +1,54 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Dropdown } from "antd";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import "./Header.css";
+import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../../../redux/user/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch(`/api/auth/signout`);
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+    } catch (error) {
+      dispatch(signOutUserFailure(error.message));
+    }
+  };
+
+  // Menu items for profile dropdown
+  const profileMenuItems = currentUser
+    ? [
+        {
+          key: "profile",
+          label: <NavLink to="/profile">Profile</NavLink>,
+        },
+        {
+          key: "logout",
+          label: <NavLink onClick={handleSignOut}>Logout</NavLink>,
+        },
+      ]
+    : [
+        {
+          key: "login",
+          label: <NavLink to="/login">Login</NavLink>,
+        },
+        {
+          key: "register",
+          label: <NavLink to="/register">Register</NavLink>,
+        },
+      ];
+
+  const profileMenu = { items: profileMenuItems };
+
   return (
     <header>
       <div className="container">
@@ -23,23 +68,31 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/catalog"
+                  to="/headphones"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  Catalog
+                  Headphones
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/contact"
+                  to="/speakers"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  Contact
+                  Speakers
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/earphones"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Earphones
                 </NavLink>
               </li>
               {currentUser?.isAdmin && (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" style={{marginInline: "auto 1rem"}}>
                     <NavLink
                       to="/admin"
                       className={({ isActive }) => (isActive ? "active" : "")}
@@ -49,43 +102,26 @@ const Header = () => {
                   </li>
                 </>
               )}
-              {currentUser && (
-                <>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/profile"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink to="/logout">Logout</NavLink>
-                  </li>
-                </>
-              )}
-              {!currentUser && (
-                <>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/register"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      Register
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/login"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      Login
-                    </NavLink>
-                  </li>
-                </>
-              )}
             </ul>
           </nav>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            {/* Profile Dropdown */}
+            <Dropdown menu={profileMenu} placement="bottomRight">
+              <Button
+                type="text"
+                icon={
+                  <UserOutlined style={{ fontSize: "2rem", color: "#fff" }} />
+                }
+              />
+            </Dropdown>
+
+            {/* Cart Icon */}
+            <NavLink to="/cart">
+              <ShoppingCartOutlined
+                style={{ fontSize: "2.4rem", color: "#fff" }}
+              />
+            </NavLink>
+          </div>
         </div>
       </div>
     </header>
