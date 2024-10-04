@@ -1,4 +1,4 @@
-#hero {
+.hero {
     width: 100%;
     height: 63.2rem;
     background: url(/home/image-hero2.png) #0f0f0f no-repeat;
@@ -6,7 +6,7 @@
     background-size: 70.8rem 88.6rem;
 }
 
-#hero-wrapper {
+.hero-wrapper {
     max-width: 39.8rem;
     display: flex;
     flex-direction: column;
@@ -14,22 +14,22 @@
     padding: 12.6rem 0 0 0;
 }
 
-#hero-overline {
+.hero-overline {
     color: var(--color-white);
     opacity: 0.4964;
 }
 
-#hero-heading {
+.hero-heading {
     color: var(--color-white);
 }
 
-#hero-desc {
+.hero-desc {
     max-width: 34.9rem;
     color: var(--color-white);
     opacity: .75;
 }
 
-#hero-wrapper button {
+.hero-wrapper button {
     margin-top: 1.6rem;
     width: fit-content;
 }
