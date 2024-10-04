@@ -260,7 +260,7 @@ const AdminProductEditPage = () => {
         <Row gutter={24}>
           <Col span={24}>
             <Form.Item label="Product Includes">
-              <Form.List name="includes">
+              <Form.List name="inTheBox">
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map((field) => (

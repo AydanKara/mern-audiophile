@@ -21,7 +21,7 @@
     margin: 10rem auto;
     padding: 4.8rem;
     background-color: var(--color-white);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
     border-radius: var(--border-radius-8);
     text-align: center;
 }

@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Dropdown } from "antd";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import "./Header.css";
-import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../../../redux/user/userSlice";
+import {
+  signOutUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
+} from "../../../redux/user/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -92,7 +96,10 @@ const Header = () => {
               </li>
               {currentUser?.isAdmin && (
                 <>
-                  <li className="nav-item" style={{marginInline: "auto 1rem"}}>
+                  <li
+                    className="nav-item"
+                    style={{ marginInline: "auto 1rem" }}
+                  >
                     <NavLink
                       to="/admin"
                       className={({ isActive }) => (isActive ? "active" : "")}

@@ -31,7 +31,7 @@ export const getCategoryById = async (req, res, next) => {
   try {
     const categoryId = req.params.id;
     const category = await Category.findById(categoryId);
-    console.log(category);
+    
     if (!category) {
       return next(errorHandler(404, "Category not found!"));
     }

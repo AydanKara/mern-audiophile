@@ -47,7 +47,7 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    includes: {
+    inTheBox: {
       type: [
         {
           quantity: { type: Number, required: true },
