@@ -43,7 +43,7 @@ const ProductDetailsPage = () => {
   }, [apiUrl, id]);
 
   const handleAddToCart = () => {
-    // Example action: you can integrate Redux or other state management here
+    // integrate Redux or other state management here
     message.success(`Added ${quantity} of ${dataSource.name} to the cart.`);
   };
 

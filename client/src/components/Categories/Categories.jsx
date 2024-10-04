@@ -4,7 +4,7 @@ import { message, Spin } from "antd";
 import "./Categories.css";
 
 const Categories = () => {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL; // Your API base URL
+  const apiUrl = import.meta.env.VITE_API_BASE_URL; 
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -25,8 +25,8 @@ const Categories = () => {
   }, [apiUrl]);
 
   useEffect(() => {
-    fetchCategories(); // Fetch categories when the component mounts
-  }, [fetchCategories]); // Use fetchCategories as a dependency
+    fetchCategories(); 
+  }, [fetchCategories]); 
   return (
     <Spin spinning={loading} size="large">
       <section className="products-categories">

@@ -4,7 +4,9 @@ import {
   deleteProductById,
   getAllProducts,
   getFeaturedProductsByName,
+  getLatestProduct,
   getProductById,
+  getProductsByCategory,
   getRandomProducts,
   updateProductById,
 } from "../controllers/product.js";
@@ -15,8 +17,10 @@ import checkObjectId from "../middlewares/checkObjectId.js";
 const router = express.Router();
 
 router.get("/", getAllProducts);
+router.get("/latest", getLatestProduct);
 router.get("/featured", getFeaturedProductsByName);
 router.get("/random", getRandomProducts);
+router.get("/catalog/:category", getProductsByCategory);
 router
   .route("/:id")
   .get(checkObjectId, getProductById)

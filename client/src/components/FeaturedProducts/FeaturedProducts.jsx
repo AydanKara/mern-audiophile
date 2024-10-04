@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./FeaturedProducts.css";
+import { Spin } from "antd";
 
 const FeaturedProducts = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `${apiUrl}/api/product/featured?names=YX1 Wireless Earphones,ZX7 Speaker,ZX9 Speaker`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
         const data = await response.json();
         setFeaturedProducts(data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, [apiUrl]);
 
-  console.log(featuredProducts);
+  if (loading) {
+    return <Spin spinning={loading} />;
+  }
 
   return (
     <section className="featured-products">
