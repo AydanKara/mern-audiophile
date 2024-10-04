@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import Product from "../models/Product.js";
+import { errorHandler } from "../utils/error.js";
 
 export const createProduct = async (req, res, next) => {
   try {
@@ -15,7 +17,38 @@ export const getAllProducts = async (req, res, next) => {
 
     res.status(200).json(products);
   } catch (error) {
-    next(error);
+    next(errorHandler(500, "Server error"));
+  }
+};
+
+export const getRandomProducts = async (req, res, next) => {
+  const { excludeId } = req.query;
+  console.log(excludeId + "26 line");
+  try {
+    if (!mongoose.Types.ObjectId.isValid(excludeId)) {
+      return res.status(400).json({ error: "Invalid product ID" });
+    }
+    const randomProducts = await Product.aggregate([
+      {
+        $match: {
+          _id: { $ne: new mongoose.Types.ObjectId(excludeId) },
+        },
+      }, // Exclude the current product
+      { $sample: { size: 3 } }, // Randomly select 3 products
+      {
+        $project: {
+          // Only include the required fields
+          name: 1,
+          image: 1,
+          _id: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json(randomProducts);
+  } catch (err) {
+    console.error(err);
+    next(errorHandler(500, "Server error"));
   }
 };
 
@@ -23,7 +56,7 @@ export const getProductById = async (req, res, next) => {
   try {
     const productId = req.params.id;
     const product = await Product.findById(productId);
-    console.log(product);
+
     if (!product) {
       return next(errorHandler(404, "Product not found!"));
     }

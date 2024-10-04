@@ -14,7 +14,7 @@ const ProductItem = ({ product, isReversed }) => {
                   <h2>{product.name}</h2>
                   <p className="product-desc">{product.description}</p>
                   <Link
-                    to={`/catalog/${product._id}/details`}
+                    to={`/product/${product._id}`}
                     className="btn-1"
                   >
                     See Product
@@ -39,7 +39,7 @@ const ProductItem = ({ product, isReversed }) => {
                   <h2>{product.name}</h2>
                   <p className="product-desc">{product.description}</p>
                   <Link
-                    to={`/catalog/${product._id}/details`}
+                    to={`/product/${product._id}`}
                     className="btn-1"
                   >
                     See Product

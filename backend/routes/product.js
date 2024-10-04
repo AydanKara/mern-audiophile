@@ -4,6 +4,7 @@ import {
   deleteProductById,
   getAllProducts,
   getProductById,
+  getRandomProducts,
   updateProductById,
 } from "../controllers/product.js";
 import { verifyToken } from "../middlewares/verifyUser.js";
@@ -13,6 +14,7 @@ import checkObjectId from "../middlewares/checkObjectId.js";
 const router = express.Router();
 
 router.get("/", getAllProducts);
+router.get("/random", getRandomProducts);
 router
   .route("/:id")
   .get(checkObjectId, getProductById)
