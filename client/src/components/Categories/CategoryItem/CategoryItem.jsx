@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CategoryItem.css";
 
 const CategoryItem = ({ img, name }) => {
+  const navigate = useNavigate();
   return (
-    <div className="category-cart">
+    <div onClick={() => navigate(`/catalog/${name}`)} className="category-cart">
       <div className="category-img-wrapper">
         <img className="category-img" src={img} alt={name} />
       </div>
