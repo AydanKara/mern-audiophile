@@ -72,7 +72,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/headphones"
+                  to="/catalog/headphones"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Headphones
@@ -80,7 +80,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/speakers"
+                  to="/catalog/speakers"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Speakers
@@ -88,7 +88,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/earphones"
+                  to="/catalog/earphones"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Earphones
