@@ -3,6 +3,7 @@ import {
   createProduct,
   deleteProductById,
   getAllProducts,
+  getFeaturedProductsByName,
   getProductById,
   getRandomProducts,
   updateProductById,
@@ -14,6 +15,7 @@ import checkObjectId from "../middlewares/checkObjectId.js";
 const router = express.Router();
 
 router.get("/", getAllProducts);
+router.get("/featured", getFeaturedProductsByName);
 router.get("/random", getRandomProducts);
 router
   .route("/:id")

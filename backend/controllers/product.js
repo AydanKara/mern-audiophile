@@ -52,6 +52,21 @@ export const getRandomProducts = async (req, res, next) => {
   }
 };
 
+export const getFeaturedProductsByName = async (req, res, next) => {
+  
+  const productNames = req.query.names.split(",") || [];
+  
+  try {
+    const products = await Product.find({ name: { $in: productNames } })
+      .limit(3)
+      .select("name image");
+
+    res.status(200).json(products);
+  } catch (err) {
+    next(errorHandler(500, "Server error"));
+  }
+};
+
 export const getProductById = async (req, res, next) => {
   try {
     const productId = req.params.id;
