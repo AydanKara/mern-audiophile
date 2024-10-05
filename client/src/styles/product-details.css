@@ -65,6 +65,11 @@
     margin: 0 2.3rem;
 }
 
+.stock {
+    margin: 2rem 0;
+    opacity: .5;
+}
+
 .product-details {
     display: flex;
     gap: 12.5rem;

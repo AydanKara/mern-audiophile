@@ -21,3 +21,9 @@ export const notifyInfo = (message) => {
     className: "custom-toast",
   });
 };
+
+export const notifyWarning = (message) => {
+  toast.warning(message, {
+    className: "custom-toast",
+  });
+};

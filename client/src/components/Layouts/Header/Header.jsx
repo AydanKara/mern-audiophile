@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Dropdown } from "antd";
+import { Badge, Button, Dropdown } from "antd";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import "./Header.css";
 import {
@@ -8,10 +8,20 @@ import {
   signOutUserStart,
   signOutUserSuccess,
 } from "../../../redux/user/userSlice";
+import { useState } from "react";
+import CartModalContent from "../../Modal/CartModalContent/CartModalContent";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const { cartItems, totalQuantity, totalPrice } = useSelector(
+    (state) => state.cart
+  );
+  const [cartVisible, setCartVisible] = useState(false);
+
+  const toggleCart = () => {
+    setCartVisible(!cartVisible);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -123,12 +133,25 @@ const Header = () => {
             </Dropdown>
 
             {/* Cart Icon */}
-            <NavLink to="/cart">
+
+            <Badge
+              count={totalQuantity}
+              style={{ backgroundColor: "#f0f0f0", color: "black" }}
+            >
               <ShoppingCartOutlined
                 style={{ fontSize: "2.4rem", color: "#fff" }}
+                onClick={toggleCart}
               />
-            </NavLink>
+            </Badge>
           </div>
+          {/* Cart Modal */}
+          {cartVisible && (
+            <CartModalContent
+              cartItems={cartItems}
+              toggleCart={toggleCart}
+              totalPrice={totalPrice}
+            />
+          )}
         </div>
       </div>
     </header>

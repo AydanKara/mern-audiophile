@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { message, Spin } from "antd";
+import { addToCart } from "../redux/slices/cartSlice";
 
 import Categories from "../components/Categories/Categories";
 import ShopInfo from "../components/Layouts/ShopInfo/ShopInfo";
 import ProductGallery from "../components/ProductGallery/ProductGallery";
 import ProductOthers from "../components/ProductOthers/ProductOthers";
-import "../styles/product-details.css";
-
 /* import CommentList from "../components/CommentList/CommentList";
 import CommentForm from "../components/CommentForm/CommentForm"; */
-import { message, Spin } from "antd";
-import { useSelector } from "react-redux";
+import { notifySuccess, notifyWarning } from "../utils/toastNotifications";
+
+import "../styles/product-details.css";
 
 const ProductDetailsPage = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -43,12 +46,25 @@ const ProductDetailsPage = () => {
   }, [apiUrl, id]);
 
   const handleAddToCart = () => {
-    // integrate Redux or other state management here
-    message.success(`Added ${quantity} of ${dataSource.name} to the cart.`);
+    const itemToAdd = {
+      _id: dataSource._id,
+      name: dataSource.name,
+      price: dataSource.price,
+      qty: quantity,
+      image: dataSource.image,
+      stock: dataSource.stock,
+    };
+
+    dispatch(addToCart(itemToAdd));
+    notifySuccess(`Added ${quantity} of ${dataSource.name} to the cart.`);
   };
 
   const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    if (quantity < dataSource.stock) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    } else {
+      notifyWarning("You've reached the maximum stock limit.");
+    }
   };
 
   const decrementQuantity = () => {
@@ -84,6 +100,7 @@ const ProductDetailsPage = () => {
                             <button
                               className="minus"
                               onClick={decrementQuantity}
+                              disabled={quantity <= 1}
                             >
                               -
                             </button>
@@ -91,14 +108,21 @@ const ProductDetailsPage = () => {
                             <button
                               className="plus"
                               onClick={incrementQuantity}
+                              disabled={quantity >= dataSource.stock}
                             >
                               +
                             </button>
                           </div>
-                          <button className="btn-1" onClick={handleAddToCart}>
+                          <button
+                            className="btn-1"
+                            onClick={handleAddToCart}
+                            disabled={dataSource.stock < 1}
+                          >
                             ADD TO CART
                           </button>
                         </div>
+
+                        <p className="stock">Available: {dataSource.stock}</p>
                       </div>
                     </li>
                   </ul>
