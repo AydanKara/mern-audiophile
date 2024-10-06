@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: [],
   itemsPrice: 0,
-  /* shippingPrice: 0, */
-  /* taxPrice: 0, */
+  shippingPrice: 0,
+  taxPrice: 0,
   totalPrice: 0,
 };
 
@@ -19,15 +19,15 @@ const calculatePrices = (state) => {
   );
 
   // Calculate shipping charges
-  /* state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10); */
+  state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10);
 
   // Calculate tax charges
-  /* state.taxPrice = addDecimals(Number((0.19 * state.itemsPrice).toFixed(2))); */
+  state.taxPrice = addDecimals(Number((0.19 * state.itemsPrice).toFixed(2)));
   // Calculate total price
   state.totalPrice = Math.floor(
-    Number(state.itemsPrice)
-    /* Number(state.shippingPrice) */
-    /* Number(state.taxPrice) */
+    Number(state.itemsPrice) +
+    Number(state.shippingPrice) +
+    Number(state.taxPrice)
   );
 
   state.totalQuantity = state.cartItems.reduce(

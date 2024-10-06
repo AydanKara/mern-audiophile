@@ -6,6 +6,7 @@ import {
   removeAllItems,
 } from "../../../redux/slices/cartSlice";
 import "./CartModalContent.css";
+import { Link } from "react-router-dom";
 
 const CartModalContent = ({ cartItems, totalPrice, toggleCart }) => {
   const dispatch = useDispatch();
@@ -63,9 +64,9 @@ const CartModalContent = ({ cartItems, totalPrice, toggleCart }) => {
               $ {totalPrice.toLocaleString("en")}
             </span>
           </div>
-          <a href="/" className="btn-1">
+          <Link to={"/checkout"} className="btn-1">
             Checkout
-          </a>
+          </Link>
         </ul>
       </div>
       <div className="cart-modal-overlay" onClick={toggleCart}></div>

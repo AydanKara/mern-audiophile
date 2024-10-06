@@ -1,0 +1,101 @@
+.checkout-container {
+    margin: 8rem auto 14rem auto;
+}
+
+.summary-container {
+    background: #f8f8f8;
+    padding: 3.2rem;
+    border-radius: 10px;
+}
+
+.summary-items {
+    list-style: none;
+    padding: 0;
+    margin-block: 3.2rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.summary-item img {
+    width: 50px;
+    height: 50px;
+}
+
+.item-details {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.item-name,
+.item-price {
+    margin: 0;
+}
+
+.summary-total,
+.summary-shipping,
+.summary-vat,
+.summary-grand-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-grand-total {
+    font-weight: bold;
+}
+
+.form-item-input {
+    padding: 1.6rem 2.4rem;
+    border-radius: 8px;
+}
+
+.custom-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.custom-radio-card {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-radio-card:hover,
+.ant-radio-wrapper-checked,
+.form-item-input:hover,
+.form-item-input:focus,
+.ant-radio-wrapper:hover .ant-radio-inner,
+.custom-radio-card .ant-radio-checked {
+    border-color: #d87d4a;
+}
+
+.custom-radio-card .ant-radio-checked .ant-radio-inner {
+    border-color: #d87d4a;
+    background-color: white;
+}
+
+.custom-radio-card .ant-radio-inner::after {
+    background-color: #d87d4a;
+}
+
+.custom-radio-card-selected {
+    border: 1px solid #d87d4a;
+}
+
+.cash-on-delivery {
+    display: flex;
+    align-items: center;
+    gap: 3.2rem;
+}

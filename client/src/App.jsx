@@ -25,6 +25,7 @@ import "./styles/toastify-custom.css";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import AdminProductEditPage from "./pages/admin/AdminProductEditPage";
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   return (
@@ -39,10 +40,7 @@ function App() {
               path="/catalog/:categoryTitle"
               element={<CatalogCategoryPage />}
             />
-            <Route
-              path="/product/:id"
-              element={<ProductDetailsPage />}
-            />
+            <Route path="/product/:id" element={<ProductDetailsPage />} />
 
             <Route path="/contact" element={<ContactPage />} />
 
@@ -51,6 +49,7 @@ function App() {
 
             <Route element={<AuthGuard />}>
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
             </Route>
 
             <Route element={<AdminGuard />}>
