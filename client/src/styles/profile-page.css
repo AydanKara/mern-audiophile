@@ -1,14 +1,6 @@
-.profile-section {
-    margin-bottom: 30px;
-}
-
-/* .profile-section-wrapper {
+.profile-section-wrapper {
     margin: 7rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 7rem;
-} */
+}
 
 /* .profile-section-wrapper h3 {
     margin-bottom: 12rem;
@@ -129,7 +121,8 @@
     /* Hover color */
 }
 
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
     font-size: 2.6rem;
     color: #000 !important;
-} 
+}

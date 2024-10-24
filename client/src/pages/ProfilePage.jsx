@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { Form, Input, Row, Col, Divider, Button } from "antd";
 import {
   updateUserStart,
   updateUserSuccess,
@@ -13,72 +14,127 @@ import {
   signOutUserFailure,
   clearAllErrors,
   clearFieldError,
-  signInFailure,
 } from "../redux/user/userSlice";
-import { notifySuccess } from "../utils/toastNotifications";
+import {
+  notifyError,
+  notifySuccess,
+  notifyWarning,
+} from "../utils/toastNotifications";
 import "../styles/profile-page.css";
 import ConfirmModal from "../components/Modal/ConfirmModal";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({});
+  const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
   const { currentUser, loading, error } = useSelector((state) => state.user);
 
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    fullName: "",
+    phone: "",
+    shippingInfo: {},
+  });
+
   useEffect(() => {
     if (currentUser) {
+      console.log(currentUser);
       setFormData({
+        username: currentUser.username || "",
+        email: currentUser.email || "",
+        fullName: currentUser.fullName || "",
+        phone: currentUser.phone || "",
+        shippingInfo: {
+          address: currentUser.shippingInfo?.address || "",
+          zipCode: currentUser.shippingInfo?.zipCode || "",
+          city: currentUser.shippingInfo?.city || "",
+          country: currentUser.shippingInfo?.country || "",
+        },
+      });
+      form.setFieldsValue({
         username: currentUser.username,
         email: currentUser.email,
+        fullName: currentUser.fullName,
+        phone: currentUser.phone,
+        shippingInfo: {
+          address: currentUser.shippingInfo?.address,
+          zipCode: currentUser.shippingInfo?.zipCode,
+          city: currentUser.shippingInfo?.city,
+          country: currentUser.shippingInfo?.country,
+        },
       });
     }
-    // Clear all errors when the component mounts (e.g., page refresh)
     dispatch(clearAllErrors());
-  }, [currentUser, dispatch]);
+  }, [currentUser, dispatch, form]);
+  console.log(formData);
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
+  const handleChange = (changedValues) => {
+    const fieldKey = Object.keys(changedValues)[0];
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (fieldKey.startsWith("shippingInfo")) {
+      // If the changed field is within shippingInfo, merge it properly
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        shippingInfo: {
+          ...prevFormData.shippingInfo,
+          ...changedValues.shippingInfo,
+        },
+      }));
+    } else {
+      // For other top-level fields
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ...changedValues,
+      }));
+    }
 
-    // Dispatch action to clear specific field error
-    dispatch(clearFieldError(name));
+    if (fieldKey) {
+      dispatch(clearFieldError(fieldKey));
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
+      console.log(formData);
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          fullName: formData.fullName,
+          phone: formData.phone,
+          shippingInfo: formData.shippingInfo,
+        }),
       });
       const data = await res.json();
+      console.log("Response from server:", data);
+
       if (data.errors) {
-        // Create an object mapping field names to error messages
         const errors = data.errors.reduce((acc, error) => {
           acc[error.field] = error.message;
           return acc;
         }, {});
-
-        dispatch(signInFailure(errors));
+        dispatch(updateUserFailure(errors));
         return;
       }
+
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
+        notifyError(data.message || "Login failed! Wrong credentials.");
         return;
       }
+
       dispatch(updateUserSuccess(data));
-      notifySuccess("User updated successfully");
+      notifySuccess("Profile updated successfully");
     } catch (error) {
+      console.error("Error during update:", error);
       dispatch(updateUserFailure(error.message));
+      notifyWarning(error.message);
     }
   };
 
@@ -125,61 +181,154 @@ const ProfilePage = () => {
       </div>
       <section className="container">
         <div className="profile-section-wrapper">
-          <form className="form" onSubmit={handleSubmit}>
-            <p className="input-box">
-              <label htmlFor="email">E-Mail</label>
-              {error?.email && <span className="error">{error.email}</span>}
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className={error?.email ? "error-input" : ""}
-                defaultValue={currentUser.email}
-                onChange={handleChange}
-              />
-            </p>
-            <p className="input-box">
-              <label htmlFor="username">Username</label>
-              {error?.username && (
-                <span className="error">{error.username}</span>
-              )}
-              <input
-                type="text"
-                name="username"
-                id="username"
-                defaultValue={currentUser.username}
-                onChange={handleChange}
-                className={error?.username ? "error-input" : ""}
-              />
-            </p>
-            <p className="input-box">
-              <label htmlFor="password">Password</label>
-              {error?.password && (
-                <span className="error">{error.password}</span>
-              )}
+          <Form
+            form={form}
+            layout="vertical"
+            onValuesChange={handleChange}
+            onFinish={handleSubmit}
+            style={{
+              maxWidth: 730,
+              margin: "auto",
+              padding: "40px",
+              backgroundColor: "#fff",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <h2 className="sub-title">Account Information</h2>
+            <Row gutter={16}>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Username"
+                  name="username"
+                  rules={[
+                    { required: true, message: "Please enter your username" },
+                  ]}
+                  validateStatus={error?.name ? "error" : ""}
+                  help={error?.name}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your username"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Email Address"
+                  name="email"
+                  rules={[
+                    { required: true, message: "Please enter your email" },
+                  ]}
+                  validateStatus={error?.email ? "error" : ""}
+                  help={error?.email}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your email"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Phone Number"
+                  name="phone"
+                  rules={[
+                    {
+                      message: "Please enter your phone number",
+                    },
+                  ]}
+                  validateStatus={error?.phone ? "error" : ""}
+                  help={error?.phone}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your phone number"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Full Name"
+                  name="fullName"
+                  rules={[
+                    {
+                      message: "Please enter your full name",
+                    },
+                  ]}
+                  validateStatus={error?.fullName ? "error" : ""}
+                  help={error?.fullName}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your full name"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
 
-              <input
-                type="password"
-                name="password"
-                id="password"
-                onChange={handleChange}
-                className={error?.password ? "error-input" : ""}
-              />
-            </p>
-            <p className="input-box">
-              <label htmlFor="repass">Confirm Password</label>
-              {error?.repass && <span className="error">{error.repass}</span>}
-              <input
-                type="password"
-                name="repass"
-                id="repass"
-                onChange={handleChange}
-                className={error?.repass ? "error-input" : ""}
-              />
-            </p>
-            <button disabled={loading} type="submit" className="btn-1">
+            <Divider />
+
+            <h2 className="sub-title">Shipping Information</h2>
+            <Row gutter={16}>
+              <Col xs={24}>
+                <Form.Item
+                  label="Address"
+                  name={["shippingInfo", "address"]}
+                  rules={[{ message: "Please enter your address" }]}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your address"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="ZIP Code"
+                  name={["shippingInfo", "zipCode"]}
+                  rules={[{ message: "Please enter your ZIP code" }]}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your ZIP code"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="City"
+                  name={["shippingInfo", "city"]}
+                  rules={[{ message: "Please enter your city" }]}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your city"
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Country"
+                  name={["shippingInfo", "country"]}
+                  rules={[{ message: "Please enter your country" }]}
+                >
+                  <Input
+                    className="form-item-input"
+                    placeholder="Enter your country"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Button
+              htmlType="submit"
+              disabled={loading}
+              className="btn-1"
+              style={{ height: "auto" }}
+            >
               {loading ? "Loading..." : "Update"}
-            </button>
+            </Button>
 
             <div className="profile-actions">
               <span onClick={() => setShowModal(true)} className="btn-2">
@@ -189,7 +338,7 @@ const ProfilePage = () => {
                 Sign out
               </span>
             </div>
-          </form>
+          </Form>
         </div>
       </section>
 
