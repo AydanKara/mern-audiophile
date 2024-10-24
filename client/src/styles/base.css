@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 * {
+    font-family: 'Manrope', sans-serif !important;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,8 +9,6 @@
 
 html {
     font-size: 62.5%;
-    font-family: 'Manrope', sans-serif;
-
     --color-orange: #D87D4A;
     --color-orange-hover: #FBAF85;
     --color-black: #0f0f0f;
@@ -152,8 +151,8 @@ button {
 
 .btn-1:hover,
 .btn-1:active {
-    background-color: var(--color-orange-hover);
-    color: var(--color-white);
+    background-color: var(--color-orange-hover) !important;
+    color: var(--color-white) !important;
 }
 
 .btn-1:disabled {

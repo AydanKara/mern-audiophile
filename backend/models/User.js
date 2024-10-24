@@ -11,6 +11,26 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    fullName: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    shippingInfo: {
+      address: {
+        type: String,
+      },
+      zipCode: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      country: {
+        type: String,
+      },
+    },
     password: {
       type: String,
       required: true,

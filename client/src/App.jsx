@@ -19,13 +19,13 @@ import AdminGuard from "./guard/AdminGuard";
 import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
 import AdminLayout from "./components/Layouts/Admin/AdminLayout";
 import AdminProductCreatePage from "./pages/admin/AdminProductCreatePage";
-import "./styles/base.css";
-import "react-toastify/dist/ReactToastify.css";
-import "./styles/toastify-custom.css";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import AdminProductEditPage from "./pages/admin/AdminProductEditPage";
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import "./styles/base.css";
+import "react-toastify/dist/ReactToastify.css";
+import "./styles/toastify-custom.css";
 
 function App() {
   return (

@@ -26,10 +26,17 @@ export const updateUser = async (req, res, next) => {
           username: req.body.username,
           email: req.body.email,
           password: req.body.password,
+          fullName: req.body.fullName,
+          phone: req.body.phone,
+          shippingInfo: req.body.shippingInfo,
         },
       },
       { new: true }
     );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     const { password, ...rest } = updatedUser._doc;
 
@@ -54,7 +61,6 @@ export const updateAdminStatus = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)

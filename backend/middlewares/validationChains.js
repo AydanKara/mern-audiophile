@@ -40,15 +40,31 @@ export const updateChain = () => [
   check("email")
     .trim()
     .isEmail()
-    .isLength({ min: 10 })
-    .withMessage("Email must be at least 10 characters long"),
-
+    .isLength({ min: 8 })
+    .withMessage("Email must be at least 8 characters long"),
+  check("fullName").optional(), // Not required, so optional
+  check("phone").optional(), // Not required, so optional
+  check("shippingInfo.address")
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage("Address should not be empty"),
+  check("shippingInfo.zipCode")
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage("ZIP code should not be empty"),
+  check("shippingInfo.city")
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage("City should not be empty"),
+  check("shippingInfo.country")
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage("Country should not be empty"),
   // Optional password validation - applies only if the password is provided
   check("password")
     .optional({ checkFalsy: true }) // only validate if password is provided
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long"),
-
   // Confirm password (repass) - validate only if password is provided
   check("repass")
     .if((value, { req }) => req.body.password) // validate if password exists
