@@ -36,7 +36,11 @@ const CartModalContent = ({ cartItems, totalPrice, toggleCart }) => {
             <li className="cart-item" key={index}>
               <img src={item.image} alt={item.name} />
               <div className="item-heading">
-                <p className="item-title">{item.name}</p>
+                <p className="item-title">
+                  {item.name
+                    .replace(/Headphones|Earphones|Speakers/g, "")
+                    .trim()}
+                </p>
                 <p className="item-price">$ {item.price}</p>
               </div>
               <div className="product-quantity">
@@ -64,7 +68,7 @@ const CartModalContent = ({ cartItems, totalPrice, toggleCart }) => {
               $ {totalPrice.toLocaleString("en")}
             </span>
           </div>
-          <Link to={"/checkout"} className="btn-1">
+          <Link to={"/checkout"} onClick={toggleCart} className="btn-1">
             Checkout
           </Link>
         </ul>

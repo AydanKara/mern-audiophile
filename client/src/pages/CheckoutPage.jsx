@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "../styles/CheckoutPage.css";
-import { Button, Col, Divider, Form, Input, Radio, Row } from "antd";
+import { Col, Divider, Form, Input, Radio, Row } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const CheckoutPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const { cart } = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, totalPrice, itemsPrice, shippingPrice, taxPrice } = cart;
 
   const [paymentMethod, setPaymentMethod] = useState("eMoney");
 
@@ -18,6 +18,10 @@ const CheckoutPage = () => {
 
   const onFinish = async (values) => {
     console.log(values);
+  };
+
+  const handleButtonClick = () => {
+    form.submit(); // Trigger the form submit when button is clicked
   };
 
   return (
@@ -35,6 +39,7 @@ const CheckoutPage = () => {
           <Form
             layout="vertical"
             form={form}
+            name="checkout-form"
             initialValues={{ paymentMethod: "eMoney" }}
             onFinish={onFinish}
             style={{
@@ -164,7 +169,6 @@ const CheckoutPage = () => {
               <Col xs={24} md={12}>
                 <Form.Item
                   label="Payment Method"
-                  name="paymentMethod"
                   labelCol={{ span: 24 }}
                   wrapperCol={{ span: 24 }}
                 />
@@ -208,8 +212,7 @@ const CheckoutPage = () => {
                     name="eMoneyNumber"
                     rules={[
                       {
-                        required:
-                          form.getFieldValue("paymentMethod") === "eMoney",
+                        required: true,
                         message: "Please enter your e-Money number",
                       },
                     ]}
@@ -226,13 +229,13 @@ const CheckoutPage = () => {
                     name="eMoneyPin"
                     rules={[
                       {
-                        required:
-                          form.getFieldValue("paymentMethod") === "eMoney",
+                        required: true,
                         message: "Please enter your e-Money PIN",
                       },
                     ]}
                   >
                     <Input
+                      type="password"
                       className="form-item-input"
                       placeholder="Enter your e-Money PIN"
                     />
@@ -248,53 +251,59 @@ const CheckoutPage = () => {
           <div className="summary-container">
             <h6>SUMMARY</h6>
             <ul className="summary-items">
-              <li className="summary-item">
-                <img src="product-image-url" alt="Product" />
-                <div className="item-details">
-                  <p className="item-name">XX99 MK II</p>
-                  <p className="item-price">$ 2,999</p>
-                </div>
-                <p className="item-quantity">x1</p>
-              </li>
-              <li className="summary-item">
-                <img src="product-image-url" alt="Product" />
-                <div className="item-details">
-                  <p className="item-name">XX59</p>
-                  <p className="item-price">$ 899</p>
-                </div>
-                <p className="item-quantity">x2</p>
-              </li>
-              <li className="summary-item">
-                <img src="product-image-url" alt="Product" />
-                <div className="item-details">
-                  <p className="item-name">YX1</p>
-                  <p className="item-price">$ 599</p>
-                </div>
-                <p className="item-quantity">x1</p>
-              </li>
+              {cartItems.map((item) => (
+                <li className="summary-item" key={item._id}>
+                  <img src={item.image} alt="Product" />
+                  <div className="item-details">
+                    <p className="item-name">
+                      {item.name
+                        .replace(/Headphones|Earphones|Speakers/g, "")
+                        .trim()}
+                    </p>
+                    <p className="item-price">
+                      $ {item.price.toLocaleString("en")}
+                    </p>
+                  </div>
+                  <p className="item-quantity">x{item.qty}</p>
+                </li>
+              ))}
             </ul>
             <Divider />
             <div className="summary-total">
-              <p>TOTAL</p>
-              <span>$ 5,396</span>
+              <p style={{ opacity: ".5" }}>TOTAL</p>
+              <span style={{ fontSize: "1.8rem", fontWeight: "700" }}>
+                $ {itemsPrice.toLocaleString("en")}
+              </span>
             </div>
             <div className="summary-shipping">
-              <p>SHIPPING</p>
-              <span>$ 50</span>
+              <p style={{ opacity: ".5" }}>SHIPPING</p>
+              <span style={{ fontSize: "1.8rem", fontWeight: "700" }}>
+                $ {shippingPrice.toLocaleString("en")}
+              </span>
             </div>
             <div className="summary-vat">
-              <p>VAT (INCLUDED)</p>
-              <span>$ 1,079</span>
+              <p style={{ opacity: ".5" }}>VAT (INCLUDED)</p>
+              <span style={{ fontSize: "1.8rem", fontWeight: "700" }}>
+                $ {taxPrice.toLocaleString("en")}
+              </span>
             </div>
             <div className="summary-grand-total">
-              <p>GRAND TOTAL</p>
-              <span>$ 5,446</span>
+              <p style={{ opacity: ".5" }}>GRAND TOTAL</p>
+              <span
+                style={{
+                  fontSize: "1.8rem",
+                  fontWeight: "700",
+                  color: "#d87d4a",
+                }}
+              >
+                $ {totalPrice.toLocaleString("en")}
+              </span>
             </div>
+            <button className="btn-1" onClick={handleButtonClick}>
+              CONTINUE & PAY
+            </button>
           </div>
         </Col>
-        {/* <Button type="primary" htmlType="submit" block>
-        CONTINUE & PAY
-      </Button> */}
       </Row>
     </main>
   );

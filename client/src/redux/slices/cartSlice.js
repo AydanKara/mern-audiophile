@@ -6,10 +6,11 @@ const initialState = {
   shippingPrice: 0,
   taxPrice: 0,
   totalPrice: 0,
+  paymentMethod: "",
 };
 
 const addDecimals = (num) => {
-  return (Math.round(num * 100) / 100).toFixed(2);
+  return Math.round(num * 100) / 100;
 };
 
 const calculatePrices = (state) => {
@@ -19,15 +20,13 @@ const calculatePrices = (state) => {
   );
 
   // Calculate shipping charges
-  state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10);
+  state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 50);
 
   // Calculate tax charges
-  state.taxPrice = addDecimals(Number((0.19 * state.itemsPrice).toFixed(2)));
+  state.taxPrice = Math.floor(addDecimals(Number(0.19 * state.itemsPrice)));
   // Calculate total price
   state.totalPrice = Math.floor(
-    Number(state.itemsPrice) +
-    Number(state.shippingPrice) +
-    Number(state.taxPrice)
+    Number(state.itemsPrice) + Number(state.shippingPrice)
   );
 
   state.totalQuantity = state.cartItems.reduce(
@@ -75,7 +74,7 @@ const cartSlice = createSlice({
     removeAllItems: (state) => {
       state.cartItems = [];
       calculatePrices(state);
-    },
+    }
   },
 });
 
