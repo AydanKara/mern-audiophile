@@ -102,7 +102,7 @@ const AdminProductEditPage = () => {
         </h2>
 
         <Row gutter={24}>
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Product Name"
               name="name"
@@ -117,7 +117,7 @@ const AdminProductEditPage = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Category"
               name="category"
@@ -140,7 +140,7 @@ const AdminProductEditPage = () => {
         </Row>
 
         <Row gutter={24}>
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Price"
               name="price"
@@ -159,7 +159,7 @@ const AdminProductEditPage = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Stock Quantity"
               name="stock"
@@ -184,6 +184,40 @@ const AdminProductEditPage = () => {
                 {
                   required: true,
                   message: "Please input image URL!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={24}>
+          <Col span={24}>
+            <Form.Item
+              label="Image Tablet URL"
+              name="imageTablet"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input tablet image URL!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={24}>
+          <Col span={24}>
+            <Form.Item
+              label="Image Mobile URL"
+              name="imageMobile"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input mobile image URL!",
                 },
               ]}
             >
@@ -265,7 +299,7 @@ const AdminProductEditPage = () => {
                   <>
                     {fields.map((field) => (
                       <Row key={field.key} gutter={24} align="middle">
-                        <Col span={12}>
+                        <Col span={12} xs={24} md={12}>
                           <Form.Item
                             {...field}
                             label="Item"

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -9,8 +11,6 @@ import {
   Row,
   Col,
 } from "antd";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -81,7 +81,7 @@ const AdminProductCreatePage = () => {
         </h2>
 
         <Row gutter={24}>
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Product Name"
               name="name"
@@ -96,7 +96,7 @@ const AdminProductCreatePage = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Category"
               name="category"
@@ -119,7 +119,7 @@ const AdminProductCreatePage = () => {
         </Row>
 
         <Row gutter={24}>
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Price"
               name="price"
@@ -138,7 +138,7 @@ const AdminProductCreatePage = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={12} sm={12} xs={24}>
             <Form.Item
               label="Stock Quantity"
               name="stock"
@@ -163,6 +163,40 @@ const AdminProductCreatePage = () => {
                 {
                   required: true,
                   message: "Please input image URL!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={24}>
+          <Col span={24}>
+            <Form.Item
+              label="Image Tablet URL"
+              name="imageTablet"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input tablet image URL!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={24}>
+          <Col span={24}>
+            <Form.Item
+              label="Image Mobile URL"
+              name="imageMobile"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input mobile image URL!",
                 },
               ]}
             >

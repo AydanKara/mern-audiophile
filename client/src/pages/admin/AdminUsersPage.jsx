@@ -150,16 +150,18 @@ const AdminUsersPage = () => {
 
   return (
     <Spin spinning={loading}>
-      <div
-        style={{
-          padding: "20px",
-          backgroundColor: "#fff",
-          borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>User List</h2>
+      <div>
+        <h2
+          style={{
+            fontWeight: "bold",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
+          User List
+        </h2>
         <Table
+          className="container"
           dataSource={users}
           columns={columns}
           rowKey="_id"

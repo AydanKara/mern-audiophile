@@ -161,13 +161,12 @@ const AdminCategoryPage = () => {
   return (
     <Spin spinning={loading}>
       <div
+        className="container"
         style={{
-          maxWidth: 800,
           margin: "auto",
           padding: "40px",
           backgroundColor: "#fff",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
         <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>
@@ -181,7 +180,7 @@ const AdminCategoryPage = () => {
           autoComplete="off"
         >
           <Row gutter={24}>
-            <Col span={12}>
+            <Col span={12} xs={24} sm={12} md={12}>
               <Form.Item
                 label="Category Name"
                 name="name"
@@ -196,7 +195,7 @@ const AdminCategoryPage = () => {
               </Form.Item>
             </Col>
 
-            <Col span={12}>
+            <Col span={12} xs={24} sm={12} md={12}>
               <Form.Item
                 label="Image URL"
                 name="img"
@@ -226,12 +225,11 @@ const AdminCategoryPage = () => {
       </div>
 
       <div
+        className="container"
         style={{
           marginTop: "20px",
           backgroundColor: "#fff",
-          padding: "20px",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Table

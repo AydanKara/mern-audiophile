@@ -98,6 +98,9 @@ const AdminLayout = () => {
         <Menu
           mode="horizontal"
           style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
             height: "100%",
             backgroundColor: "transparent",
             margin: "2rem auto",
