@@ -1,5 +1,5 @@
-.products-wrapper {
-    margin-top: 16rem;
+.products-container {
+    margin-top: 8rem;
 }
 
 .product-list {
@@ -20,4 +20,10 @@
 .product-wrapper.reversed .product-info {
     padding-left: 0;
     max-width: 44.3rem;
+}
+
+@media (max-width: 768px) {
+    .product-list {
+        gap: unset;
+    }
 }
