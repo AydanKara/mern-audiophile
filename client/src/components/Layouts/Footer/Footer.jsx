@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer>
       <div className="container">
-        <span id="line" />
-        <div id="footer-wrapper">
-          <div id="footer-nav">
+        <span className="line" />
+        <div className="footer-wrapper">
+          <div className="footer-nav">
             <Link className="logo" to="/">
               <img src="/shared/logo.svg" alt="" />
             </Link>
@@ -28,8 +28,8 @@ const Footer = () => {
               </ul>
             </nav>
           </div>
-          <div id="footer-desc">
-            <div id="footer-info">
+          <div className="footer-desc">
+            <div className="footer-info">
               <p>
                 Audiophile is an all in one stop to fulfill your audio needs.
                 We`re a small team of music lovers and sound specialists who are
@@ -38,7 +38,7 @@ const Footer = () => {
               </p>
               <p>Copyright 2024. All Rights Reserved</p>
             </div>
-            <div id="footer-social">
+            <div className="footer-social">
               <Link className="social-logo facebook" to="/"></Link>
               <Link className="social-logo x" to="/"></Link>
               <Link className="social-logo instagram" to="/"></Link>

@@ -67,6 +67,9 @@ const Header = () => {
     <header>
       <div className="container">
         <div id="header-wrapper">
+          <div className="hamburger-menu">
+            <img src="/shared/icon-hamburger.svg" alt="hamburger icon" />
+          </div>
           <NavLink className="logo" to="/">
             <img src="/shared/logo.svg" alt="website logo" />
           </NavLink>
@@ -104,24 +107,28 @@ const Header = () => {
                   Earphones
                 </NavLink>
               </li>
-              {currentUser?.isAdmin && (
-                <>
-                  <li
-                    className="nav-item"
-                    style={{ marginInline: "auto 1rem" }}
-                  >
-                    <NavLink
-                      to="/admin"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      Admin
-                    </NavLink>
-                  </li>
-                </>
-              )}
             </ul>
           </nav>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+              marginLeft: "auto",
+            }}
+          >
+            {currentUser?.isAdmin && (
+              <>
+                <div className="nav-item" style={{ marginInline: "auto 1rem" }}>
+                  <NavLink
+                    to="/admin"
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                  >
+                    Admin
+                  </NavLink>
+                </div>
+              </>
+            )}
             {/* Profile Dropdown */}
             <Dropdown menu={profileMenu} placement="bottomRight">
               <Button

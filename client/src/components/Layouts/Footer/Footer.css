@@ -4,52 +4,52 @@ footer {
     background-color: #0f0f0f;
 }
 
-footer #line {
+footer .line {
     display: block;
     width: 10.1rem;
     height: .4rem;
     background-color: var(--color-orange);
 }
 
-#footer-wrapper {
+.footer-wrapper {
     margin: 7.1rem 0 4.8rem 0;
 }
 
-#footer-nav {
+.footer-nav {
     display: flex;
     justify-content: space-between;
 }
 
-#footer-nav nav {
+.footer-nav nav {
     width: fit-content;
 }
 
-#footer-desc {
+.footer-desc {
     position: relative;
     margin-top: 3.6rem;
     display: flex;
     justify-content: space-between;
 }
 
-#footer-info {
+.footer-info {
     display: flex;
     flex-direction: column;
     gap: 5.6rem;
 }
 
-#footer-info p {
+.footer-info p {
     color: var(--color-white);
     opacity: .5;
     max-width: 54rem;
 }
 
-#footer-social {
+.footer-social {
     position: absolute;
     bottom: 8.8rem;
     right: 0;
 }
 
-#footer-social .social-logo {
+.footer-social .social-logo {
     display: inline-block;
     margin-left: 1.6rem;
     width: 2.4rem;
@@ -60,9 +60,11 @@ footer #line {
 .facebook {
     background: url("/shared/icon-facebook.svg") no-repeat center;
 }
+
 .x {
     background: url("/shared/icon-x.svg") no-repeat center;
 }
+
 .instagram {
     background: url("/shared/icon-instagram.svg") no-repeat center;
 }
@@ -71,11 +73,35 @@ footer #line {
     background: url("/shared/facebook-hover.svg") no-repeat center !important;
     z-index: 10;
 }
+
 .social-logo:hover.x {
     background: url("/shared/x-hover.svg") no-repeat center !important;
     z-index: 10;
 }
+
 .social-logo:hover.instagram {
     background: url("/shared/instagram-hover.svg") no-repeat center !important;
     z-index: 10;
+}
+
+/* responsive */
+
+@media (max-width: 768px) {
+    footer {
+        height: 44rem;
+    }
+
+    .footer-wrapper {
+        margin: 6rem 0 4.6rem 0;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        gap: 3.2rem;
+    }
+
+    .footer-social {
+        bottom: 0;
+    }
+
 }

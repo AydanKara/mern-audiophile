@@ -45,7 +45,7 @@ h6 {
 }
 
 h1 {
-    font-size: 56px;
+    font-size: 5.6rem;
     line-height: 5.8rem;
     letter-spacing: .2rem;
 }
@@ -173,7 +173,7 @@ button {
 }
 
 .btn-alt:hover {
-    background-color: #4C4C4C;
+    background-color: #4C4C4C !important;
 }
 
 .btn-alt-3 {
@@ -211,7 +211,7 @@ button {
 
 @media (max-width: 1280px) {
     .container {
-        max-width: 89%;
+        max-width: 92%;
     }
 }
 
