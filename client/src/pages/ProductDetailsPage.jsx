@@ -77,7 +77,7 @@ const ProductDetailsPage = () => {
     <main>
       <section className="container">
         <Spin spinning={loading}>
-          <div className="products-wrapper">
+          <div className="products-container">
             <button className="btn-back go-back" onClick={() => navigate(-1)}>
               Go Back
             </button>

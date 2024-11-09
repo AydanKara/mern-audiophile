@@ -4,7 +4,7 @@ const ProductGallery = ({ product }) => {
   const galleryImages = product?.galleryImage || [];
 
   return (
-    <ul id="product-gallery">
+    <ul className="product-gallery">
       <li className="first">
         <img src={galleryImages[0]} alt="First image from gallery" />
       </li>

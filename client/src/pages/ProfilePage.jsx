@@ -67,7 +67,6 @@ const ProfilePage = () => {
     }
     dispatch(clearAllErrors());
   }, [currentUser, dispatch, form]);
-  console.log(formData);
 
   const handleChange = (changedValues) => {
     const fieldKey = Object.keys(changedValues)[0];
@@ -112,7 +111,6 @@ const ProfilePage = () => {
         }),
       });
       const data = await res.json();
-      console.log("Response from server:", data);
 
       if (data.errors) {
         const errors = data.errors.reduce((acc, error) => {

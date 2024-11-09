@@ -13,10 +13,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-basis: 31.5%;
+}
+
+.other-item a {
+    margin-top: auto;
 }
 
 .other-item .other-img {
-    width: 35rem;
+    width: 100%;
     height: 31.8rem;
 }
 
@@ -29,4 +34,10 @@
 
 .other-item h5 {
     margin: 4rem 0 3.2rem 0;
+}
+
+@media (max-width: 768px) {
+    .product-others {
+        margin-top: 12rem;
+    }
 }
