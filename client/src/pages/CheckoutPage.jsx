@@ -1,23 +1,94 @@
-import { useState } from "react";
-import "../styles/CheckoutPage.css";
-import { Col, Divider, Form, Input, Radio, Row } from "antd";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Col, Divider, Form, Input, Radio, Row } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAllErrors, clearFieldError } from "../redux/user/userSlice";
+import OrderConfirmationModal from "../components/Modal/OrderConfirmationModal";
+import "../styles/CheckoutPage.css";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const { cartItems, totalPrice, itemsPrice, shippingPrice, taxPrice } = cart;
 
   const [paymentMethod, setPaymentMethod] = useState("eMoney");
 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    shippingInfo: {},
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      setFormData({
+        fullName: currentUser.fullName || "",
+        email: currentUser.email || "",
+        phone: currentUser.phone || "",
+        shippingInfo: {
+          address: currentUser.shippingInfo?.address || "",
+          zipCode: currentUser.shippingInfo?.zipCode || "",
+          city: currentUser.shippingInfo?.city || "",
+          country: currentUser.shippingInfo?.country || "",
+        },
+      });
+      form.setFieldsValue({
+        fullName: currentUser.fullName,
+        email: currentUser.email,
+        phone: currentUser.phone,
+        shippingInfo: {
+          address: currentUser.shippingInfo?.address,
+          zipCode: currentUser.shippingInfo?.zipCode,
+          city: currentUser.shippingInfo?.city,
+          country: currentUser.shippingInfo?.country,
+        },
+      });
+    }
+    dispatch(clearAllErrors());
+  }, [currentUser, dispatch, form]);
+
   const handlePaymentChange = (e) => {
     setPaymentMethod(e.target.value);
   };
 
+  const handleChange = (changedValues) => {
+    const fieldKey = Object.keys(changedValues)[0];
+
+    if (fieldKey.startsWith("shippingInfo")) {
+      // If the changed field is within shippingInfo, merge it properly
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        shippingInfo: {
+          ...prevFormData.shippingInfo,
+          ...changedValues.shippingInfo,
+        },
+      }));
+    } else {
+      // For other top-level fields
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ...changedValues,
+      }));
+    }
+
+    if (fieldKey) {
+      dispatch(clearFieldError(fieldKey));
+    }
+  };
+
   const onFinish = async (values) => {
+    setIsModalVisible(true);
+    console.log(formData);
     console.log(values);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
   };
 
   const handleButtonClick = () => {
@@ -41,6 +112,7 @@ const CheckoutPage = () => {
             form={form}
             name="checkout-form"
             initialValues={{ paymentMethod: "eMoney" }}
+            onValuesChange={handleChange}
             onFinish={onFinish}
             style={{
               maxWidth: 730,
@@ -58,7 +130,7 @@ const CheckoutPage = () => {
               <Col xs={24} md={12}>
                 <Form.Item
                   label="Name"
-                  name="name"
+                  name="fullName"
                   rules={[
                     { required: true, message: "Please enter your name" },
                   ]}
@@ -108,7 +180,7 @@ const CheckoutPage = () => {
             </h3>
             <Form.Item
               label="Address"
-              name="address"
+              name={["shippingInfo", "address"]}
               rules={[{ required: true, message: "Please enter your address" }]}
             >
               <Input
@@ -120,7 +192,7 @@ const CheckoutPage = () => {
               <Col xs={24} md={12}>
                 <Form.Item
                   label="ZIP Code"
-                  name="zipCode"
+                  name={["shippingInfo", "zipCode"]}
                   rules={[
                     { required: true, message: "Please enter your ZIP code" },
                   ]}
@@ -134,7 +206,7 @@ const CheckoutPage = () => {
               <Col xs={24} md={12}>
                 <Form.Item
                   label="City"
-                  name="city"
+                  name={["shippingInfo", "city"]}
                   rules={[
                     { required: true, message: "Please enter your city" },
                   ]}
@@ -148,7 +220,7 @@ const CheckoutPage = () => {
               <Col xs={24} md={12}>
                 <Form.Item
                   label="Country"
-                  name="country"
+                  name={["shippingInfo", "country"]}
                   rules={[
                     { required: true, message: "Please enter your country" },
                   ]}
@@ -305,6 +377,13 @@ const CheckoutPage = () => {
           </div>
         </Col>
       </Row>
+
+      {isModalVisible && (
+        <OrderConfirmationModal
+          isVisible={isModalVisible}
+          onClose={handleCloseModal}
+        />
+      )}
     </main>
   );
 };
