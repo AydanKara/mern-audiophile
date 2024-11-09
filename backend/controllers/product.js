@@ -128,7 +128,7 @@ export const getProductsByCategory = async (req, res, next) => {
     }
 
     const products = await Product.find({ category: categoryDoc._id })
-      .select("name image description")
+      .select("name image imageTablet imageMobile description")
       .exec();
 
     res.status(200).json(products);

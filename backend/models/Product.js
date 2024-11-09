@@ -34,6 +34,14 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    imageTablet: {
+      type: String,
+      required: true,
+    },
+    imageMobile: {
+      type: String,
+      required: true,
+    },
     galleryImage: [{ type: String, required: true }],
     price: {
       type: Number,
