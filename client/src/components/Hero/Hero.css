@@ -33,3 +33,18 @@
     margin-top: 1.6rem;
     width: fit-content;
 }
+
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+        height: 87vh;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .hero-wrapper {
+        margin: auto;
+        padding-top: 17rem;
+        align-items: center;
+    }
+}
