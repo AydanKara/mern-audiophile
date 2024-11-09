@@ -2,11 +2,11 @@ import "./ShopInfo.css"
 
 const ShopInfo = () => {
   return (
-    <section id="shop-info">
+    <section className="shop-info">
       <div className="container">
-        <div id="shop-info-wrapper">
+        <div className="shop-info-wrapper">
           <div className="shop-info-col">
-            <article id="shop-info-content">
+            <article className="shop-info-content">
               <h2>
                 Bringing you the <span>best</span> audio gear
               </h2>
@@ -21,7 +21,7 @@ const ShopInfo = () => {
               </p>
             </article>
           </div>
-          <div className="shop-info-col">
+          <div className="shop-info-col shop-img">
             <img className="shop-info-img" src="/shared/image-best-gear.jpg" alt="" />
           </div>
         </div>
