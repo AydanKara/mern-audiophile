@@ -4,7 +4,7 @@ import ProductItem from "../../Products/ProductItem/ProductItem";
 const CategoryProducts = ({ products }) => {
   return (
     <section className="container">
-      <div className="products-wrapper">
+      <div className="products-category-wrapper">
         <ul className="product-list">
           {products.map((product, index) => (
             <ProductItem

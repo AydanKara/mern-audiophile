@@ -45,3 +45,21 @@
   color: var(--color-orange);
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .category-cart {
+    height: 16.4rem;
+  }
+
+  .category-img-wrapper {
+    width: 14.5rem;
+  }
+
+  .category-img-wrapper img {
+    top: -6.2rem;
+  }
+
+  .category-title > h6 {
+    font-size: 1.5rem;
+  }
+}
