@@ -121,3 +121,10 @@
 .summary-container>button {
     width: 100%;
 }
+
+@media (max-width: 992px) {
+    .summary-container {
+        max-width: 73rem;
+        margin: 3.2rem auto;
+    }
+}

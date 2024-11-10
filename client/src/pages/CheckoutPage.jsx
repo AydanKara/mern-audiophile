@@ -106,7 +106,7 @@ const CheckoutPage = () => {
       </button>
       <Row gutter={32}>
         {/* Left Section: Checkout Form */}
-        <Col xs={24} md={16}>
+        <Col xs={24} md={24} lg={16}>
           <Form
             layout="vertical"
             form={form}
@@ -319,7 +319,7 @@ const CheckoutPage = () => {
         </Col>
 
         {/* Right Section: Summary */}
-        <Col xs={24} md={8}>
+        <Col xs={24} md={24} lg={8}>
           <div className="summary-container">
             <h6>SUMMARY</h6>
             <ul className="summary-items">
