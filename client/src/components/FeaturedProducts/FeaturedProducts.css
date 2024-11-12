@@ -17,7 +17,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background: url(home/pattern-circles.svg) no-repeat;
+    background: url(/home/pattern-circles.svg) no-repeat;
     background-size: 94.4rem;
     background-position: -14.9rem -3.6rem;
 }
@@ -27,7 +27,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background: url(home/image-speaker-zx9.png) no-repeat;
+    background: url(/home/image-speaker-zx9.png) no-repeat;
     background-position: 13.5rem 11rem;
     background-size: 38.2rem;
 }
@@ -62,7 +62,7 @@
     width: 100%;
     height: 32rem;
     margin: 4.8rem 0;
-    background: url(home/image-speaker-zx7.jpg) no-repeat right;
+    background: url(/home/image-speaker-zx7.jpg) no-repeat right;
     background-size: cover;
     border-radius: 8px;
 }
@@ -98,7 +98,7 @@
 }
 
 .product-3-img {
-    background: url(home/image-earphones-yx1.jpg) no-repeat;
+    background: url(/home/image-earphones-yx1.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -117,7 +117,7 @@
 
     .product-1::before {
         top: -18rem;
-        background: url(home/pattern-circles.svg) no-repeat;
+        background: url(/home/pattern-circles.svg) no-repeat;
         background-size: 95rem;
         background-position: center;
     }
@@ -155,7 +155,7 @@
     }
 
     .product-3-img {
-        background: url(home/tablet/image-earphones-yx1.jpg) no-repeat;
+        background: url(/home/tablet/image-earphones-yx1.jpg) no-repeat;
         background-size: cover;
         background-position: center;
     }
