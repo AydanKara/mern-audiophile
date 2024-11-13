@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { notifySuccess } from "../../utils/toastNotifications";
 
 const Oauth = () => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleGoogleClick = async () => {
@@ -15,7 +16,7 @@ const Oauth = () => {
 
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch("api/auth/google", {
+      const res = await fetch(`${apiUrl}/api/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

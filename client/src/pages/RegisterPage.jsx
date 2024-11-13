@@ -14,6 +14,7 @@ import "../styles/auth.css";
 import "../styles/form.css";
 
 const RegisterPage = () => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
@@ -43,7 +44,7 @@ const RegisterPage = () => {
 
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch(`${apiUrl}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
