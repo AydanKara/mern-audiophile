@@ -24,6 +24,8 @@ import "../styles/profile-page.css";
 import ConfirmModal from "../components/Modal/ConfirmModal";
 
 const ProfilePage = () => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
@@ -97,7 +99,7 @@ const ProfilePage = () => {
     try {
       console.log(formData);
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${apiUrl}/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +141,7 @@ const ProfilePage = () => {
   const handleDelete = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${apiUrl}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -161,7 +163,7 @@ const ProfilePage = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`/api/auth/signout`);
+      const res = await fetch(`${apiUrl}/api/auth/signout`);
       const data = await res.json();
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
