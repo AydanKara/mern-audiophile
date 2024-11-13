@@ -10,10 +10,11 @@ import {
 } from "../../../redux/user/userSlice";
 import { useState } from "react";
 import CartModalContent from "../../Modal/CartModalContent/CartModalContent";
+import { notifySuccess } from "../../../utils/toastNotifications";
 
 const Header = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  
+
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { cartItems, totalQuantity, totalPrice } = useSelector(
@@ -28,8 +29,12 @@ const Header = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`${apiUrl}/api/auth/signout`);
+      const res = await fetch(`${apiUrl}/api/auth/signout`, {
+        method: "GET",
+        credentials: "include",
+      });
       const data = await res.json();
+      notifySuccess("You are now signed out")
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
         return;

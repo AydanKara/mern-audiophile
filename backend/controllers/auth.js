@@ -53,7 +53,7 @@ export const signin = async (req, res, next) => {
       .cookie("jwt", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production" ? true : false, // Use secure cookies in production
-        sameSite: "none", // Prevent CSRF attacks
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       })
       .status(200)
@@ -98,7 +98,11 @@ export const google = async (req, res, next) => {
 
 export const signOut = (req, res, next) => {
   try {
-    res.clearCookie("jwt");
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
     res.status(200).json("User has been signed out!");
   } catch (error) {
     next(error);
