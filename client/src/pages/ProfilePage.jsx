@@ -111,6 +111,7 @@ const ProfilePage = () => {
           phone: formData.phone,
           shippingInfo: formData.shippingInfo,
         }),
+        credentials: "include",
       });
       const data = await res.json();
 
