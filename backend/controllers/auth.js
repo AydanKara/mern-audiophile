@@ -53,7 +53,7 @@ export const signin = async (req, res, next) => {
       .cookie("jwt", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production" ? true : false, // Use secure cookies in production
-        sameSite: "lax", // Prevent CSRF attacks
+        sameSite: "none", // Prevent CSRF attacks
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       })
       .status(200)
