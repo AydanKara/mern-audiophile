@@ -27,7 +27,7 @@ const AdminUsersPage = () => {
   const deleteUser = async (id) => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/user/${id}`, {
+      const response = await fetch(`${apiUrl}/api/user/admin/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

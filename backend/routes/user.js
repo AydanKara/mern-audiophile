@@ -1,6 +1,7 @@
 import express from "express";
 import {
   deleteUser,
+  deleteUserAdmin,
   getAllUsers,
   updateAdminStatus,
   updateUser,
@@ -19,5 +20,12 @@ router
   .patch(checkObjectId, verifyToken, verifyAdmin, updateAdminStatus)
   .post(checkObjectId, verifyToken, updateChain(), validateRequest, updateUser);
 router.delete("/delete/:id", verifyToken, deleteUser);
+router.delete(
+  "/admin/delete/:id",
+  checkObjectId,
+  verifyToken,
+  verifyAdmin,
+  deleteUserAdmin
+);
 
 export default router;

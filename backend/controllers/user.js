@@ -62,6 +62,27 @@ export const updateAdminStatus = async (req, res, next) => {
   }
 };
 
+export const deleteUserAdmin = async (req, res, next) => {
+  try {
+    if (!req.user.isAdmin) {
+      return next(
+        errorHandler(403, "You do not have permission to perform this action.")
+      );
+    }
+
+    // Find and delete the user by ID
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User has been deleted successfully!" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only delete your own account!"));
