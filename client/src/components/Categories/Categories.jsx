@@ -3,8 +3,8 @@ import CategoryItem from "./CategoryItem/CategoryItem";
 import { message, Spin } from "antd";
 import "./Categories.css";
 
-const Categories = () => {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL; 
+const Categories = ({ closeMenu }) => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -25,15 +25,19 @@ const Categories = () => {
   }, [apiUrl]);
 
   useEffect(() => {
-    fetchCategories(); 
-  }, [fetchCategories]); 
+    fetchCategories();
+  }, [fetchCategories]);
   return (
     <Spin spinning={loading} size="large">
       <section className="products-categories">
         <div className="container">
           <div className="products-categories-wrapper">
             {dataSource.map((category) => (
-              <CategoryItem key={category._id} {...category} />
+              <CategoryItem
+                key={category._id}
+                {...category}
+                closeMenu={closeMenu}
+              />
             ))}
           </div>
         </div>
