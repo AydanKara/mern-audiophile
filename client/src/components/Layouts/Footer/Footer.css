@@ -105,3 +105,41 @@ footer .line {
     }
 
 }
+
+@media (max-width: 600px) {
+    footer {
+        height: fit-content;
+    }
+
+    .footer-wrapper {
+        margin: 5.2rem 0 0 0;
+    }
+
+    footer .line {
+        margin: 0 auto;
+    }
+
+    .footer-nav {
+        gap: 3.2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-info {
+        gap: 4.8rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-desc {
+        margin-top: 4.8rem;
+        padding-bottom: 3.8rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 4.8rem;
+    }
+
+    .footer-social {
+        position: unset;
+    }
+}

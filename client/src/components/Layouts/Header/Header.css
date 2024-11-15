@@ -165,7 +165,22 @@ nav {
 }
 
 @media (max-width: 600px) {
-    
+    .products-categories-wrapper {
+        max-width: 32.7rem;
+        flex-direction: column;
+        margin: 0 auto;
+        gap: 10rem;
+    }
+
+    .category-cart {
+        flex-basis: auto;
+    }
+
+    .ant-modal-content {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        padding: 1px 0 !important;
+    }
 }
 
 @media (max-width: 375px) {}

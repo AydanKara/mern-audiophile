@@ -48,3 +48,13 @@
         align-items: center;
     }
 }
+
+@media (max-width: 600px) {
+    .hero {
+        height: 78vh;
+    }
+
+    .hero-wrapper {
+        gap: 1.3rem;
+    }
+}

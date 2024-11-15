@@ -6,8 +6,10 @@ const CategoryItem = ({ img, name, closeMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    closeMenu(); // Close the modal
     navigate(`/catalog/${name}`); // Navigate to the category page
+    if (closeMenu) {
+      closeMenu(); // Close the modal
+    }
   };
   return (
     <div onClick={handleClick} className="category-cart">

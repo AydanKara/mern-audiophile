@@ -218,3 +218,10 @@ button {
 @media (max-width: 1024px) {}
 
 @media (max-width: 768px) {}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3.6rem;
+        line-height: 4rem;
+    }
+}

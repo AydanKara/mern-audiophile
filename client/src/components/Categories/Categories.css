@@ -6,3 +6,9 @@
     color: var(--color-orange) !important;
 }
 
+@media (max-width: 600px) {
+    .products-categories {
+        margin: 10rem 0 10rem 0;
+    }
+}
+
