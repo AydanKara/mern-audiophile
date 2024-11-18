@@ -32,7 +32,6 @@ const CatalogCategoryPage = () => {
 
     fetchProducts();
   }, [apiUrl, categoryTitle]);
-
   return (
     <main>
       <Spin spinning={loading}>
