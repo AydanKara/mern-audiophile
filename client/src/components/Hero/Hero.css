@@ -29,7 +29,7 @@
     opacity: .75;
 }
 
-.hero-wrapper button {
+.hero-wrapper a {
     margin-top: 1.6rem;
     width: fit-content;
 }
