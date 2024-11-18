@@ -4,7 +4,6 @@ import CatalogPage from "./pages/CatalogPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import { AuthProvider } from "./context/authContext";
 import Header from "./components/Layouts/Header/Header";
 import Footer from "./components/Layouts/Footer/Footer";
 import AuthGuard from "./guard/AuthGuard";
@@ -30,50 +29,48 @@ import "./styles/toastify-custom.css";
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <ContactProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<CatalogPage />} />
-            <Route
-              path="/catalog/:categoryTitle"
-              element={<CatalogCategoryPage />}
-            />
-            <Route path="/product/:id" element={<ProductDetailsPage />} />
+      <ContactProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route
+            path="/catalog/:categoryTitle"
+            element={<CatalogCategoryPage />}
+          />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
 
-            <Route path="/contact" element={<ContactPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-            <Route element={<AuthGuard />}>
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
+          <Route element={<AuthGuard />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+          </Route>
+
+          <Route element={<AdminGuard />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="categories" element={<AdminCategoryPage />} />
+              <Route path="products" element={<AdminProductsPage />} />
+              <Route
+                path="products/create"
+                element={<AdminProductCreatePage />}
+              />
+              <Route
+                path="products/edit/:id"
+                element={<AdminProductEditPage />}
+              />
+              <Route path="users" element={<AdminUsersPage />} />
             </Route>
+          </Route>
 
-            <Route element={<AdminGuard />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route path="categories" element={<AdminCategoryPage />} />
-                <Route path="products" element={<AdminProductsPage />} />
-                <Route
-                  path="products/create"
-                  element={<AdminProductCreatePage />}
-                />
-                <Route
-                  path="products/edit/:id"
-                  element={<AdminProductEditPage />}
-                />
-                <Route path="users" element={<AdminUsersPage />} />
-              </Route>
-            </Route>
-
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-          <ToastContainer />
-          <Footer />
-        </ContactProvider>
-      </AuthProvider>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <ToastContainer />
+        <Footer />
+      </ContactProvider>
     </ErrorBoundary>
   );
 }
