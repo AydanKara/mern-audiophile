@@ -27,7 +27,7 @@ const Hero = () => {
   }, [apiUrl]);
 
   if (loading) {
-    return <Spin spinning={loading} />;
+    return <Spin spinning={loading} style={{display: "none"}} />;
   }
 
   return (
