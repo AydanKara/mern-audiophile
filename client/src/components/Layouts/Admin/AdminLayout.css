@@ -1,0 +1,16 @@
+
+@media (max-width: 768px) {
+    .admin-layout h2 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (min-width: 769px) {
+   
+}
+
+@media (max-width: 375px) {
+    .ant-menu-submenu-popup .ant-menu-vertical.ant-menu-sub {
+        min-width: 0;
+    }
+}

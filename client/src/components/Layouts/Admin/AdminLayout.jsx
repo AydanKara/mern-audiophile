@@ -8,6 +8,7 @@ import {
   ShoppingCartOutlined,
   AppstoreOutlined,
 } from "@ant-design/icons";
+import "./AdminLayout.css"
 
 const { Content } = Layout;
 
@@ -96,6 +97,7 @@ const AdminLayout = () => {
     <div className="admin-layout">
       <Layout>
         <Menu
+          className="admin-menu"
           mode="horizontal"
           style={{
             display: "flex",

@@ -34,7 +34,7 @@
     }
 
     .container .ant-table-tbody>tr>td {
-        flex-basis: calc(50% - 16px);
+        flex-basis: 50%;
         /* Adjust as needed for the desired layout */
         word-wrap: break-word;
     }
@@ -44,5 +44,13 @@
         display: block;
         font-weight: bold;
         margin-bottom: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container .ant-table-tbody>tr>td {
+        flex-basis: 51%;
+        /* Adjust as needed for the desired layout */
+        word-wrap: break-word;
     }
 }
