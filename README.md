@@ -9,13 +9,13 @@
 
 <h2>Back-End</h2>
 
-<li>...</li>
-
+<li>NodeJS, Express, MongoDB</li>
 
 <h2>Front-End</h2>
 
 <li>ReactJS - For building the user interface.</li>
 <li>HTML & CSS - For structuring and styling the application.</li>
+<li>Ant Design</li>
 
 <br>
 
@@ -24,8 +24,7 @@
 <h3>Guest View</h3>
 <p>:heavy_check_mark: Home Page: Welcome visitors with a brief introduction and featured products.</p>
 <p>:heavy_check_mark: Catalog: Browse the complete list of available products.</p>
-<p>:heavy_check_mark: Details Page: View detailed information about each product (functional activities like purchase and comments are restricted).</p>
-<p>:heavy_check_mark: Contact Page: Reach out to the Audiophile team.</p>
+<p>:heavy_check_mark: Details Page: View detailed information about each product.</p>
 <p>:heavy_check_mark: Register Page: Create a new user account.</p>
 <p>:heavy_check_mark: Login Page: Access the private user area.</p>
 
@@ -35,55 +34,15 @@
 <p>:heavy_check_mark: Home Page: Access the personalized home view.</p>
 <p>:heavy_check_mark: Catalog: Browse and interact with the product catalog.</p>
 <p>:heavy_check_mark: Details Page: View detailed product information and engage in functional activities.</p>
-<p>:heavy_check_mark: Contact Page: Communicate with the Audiophile team.</p>
-<p>:heavy_check_mark: Create Page: Add new products to the catalog.</p>
-<p>:heavy_check_mark: Profile Page: Manage personal information and view user activities.</p>
+<p>:heavy_check_mark: Profile Page: Manage personal information.</p>
 <p>:heavy_check_mark: Logout: Securely log out of the application.</p>
 
-<h4>Additional Features for Logged-In Users:</h4>
+<h4>Additional Features for Logged-In Admin Users:</h4>
 
 <ul>
-&#x1F5F8 Create Products: Registered users can create new product entries and submit requests to the REST API.<br>
-&#x1F5F8 Edit/Delete Products: Product authors can edit or delete their own products. <br>
-&#x1F5F8 Interact with Products: Non-authors can like products and add them to their cart.<br>
-&#x1F5F8 Comment on Products: Logged-in users can leave comments on product pages.<br>
+&#x1F5F8 Create Products: Admin Users can create new product entries and submit requests to the REST API.<br>
+&#x1F5F8 Edit/Delete Products: Admin Users can edit or delete products. <br>
+...
 </ul>
 
 <br>
-
-<h2>Starting the app locally</h2>
-
-<h3>To run the application on your local machine, follow these steps:</h3>
-
-1. Clone the repository:
-```bash
-git clone https://github.com/AydanKara/mern-audiophile.git
-```
-2. Start the Backend Server: <br>
-   2.1 Open a terminal and navigate to the server directory
-   ```bash
-   cd backend
-   ```
-   2.1 Install dependencies
-   ```bash
-   npm install
-   2.3 Start the server
-   ```bash
-   node index.js
-   ```
-
-3. Start the Frontend: <br>
-    3.1 Open another terminal and navigate to the client directory
-   ```bash
-   cd client
-   ```
-   3.2 Install dependencies
-    ```bash
-   npm install
-    ```
-   3.3 Start the development server
-    ```bash
-    npm run dev
-    ```
-
-<h3>And you are ready to go!</h3>
