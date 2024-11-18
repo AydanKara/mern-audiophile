@@ -126,3 +126,9 @@
     font-size: 2.6rem;
     color: #000 !important;
 }
+
+@media (max-width: 375px) {
+    .ant-form {
+        padding: 40px 25px !important;
+    }
+}
