@@ -15,7 +15,9 @@ const CatalogCategoryPage = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${apiUrl}/api/product/catalog/${categoryTitle}`);
+        const response = await fetch(
+          `${apiUrl}/api/product/catalog/${categoryTitle}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }

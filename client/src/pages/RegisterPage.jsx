@@ -84,64 +84,65 @@ const RegisterPage = () => {
       <div className="site-heading">
         <h1 className="heading-title">Create new Account</h1>
       </div>
+      <div className="container">
+        <form className="form" onSubmit={handleSubmit}>
+          <p className="input-box">
+            <label htmlFor="email">E-Mail</label>
+            {error?.email && <span className="error">{error.email}</span>}
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className={error?.email ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <p className="input-box">
+            <label htmlFor="username">Username</label>
+            {error?.username && <span className="error">{error.username}</span>}
+            <input
+              type="text"
+              name="username"
+              id="username"
+              className={error?.username ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <p className="input-box">
+            <label htmlFor="password">Password</label>
+            {error?.password && <span className="error">{error.password}</span>}
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className={error?.password ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <p className="input-box">
+            <label htmlFor="repass">Confirm Password</label>
+            {error?.repass && <span className="error">{error.repass}</span>}
+            <input
+              type="password"
+              name="repass"
+              id="repass"
+              className={error?.repass ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <div className="form-actions">
+            <button disabled={loading} type="submit" className="btn-1 auth-btn">
+              {loading ? "Loading..." : "Create Account"}
+            </button>
+            <Oauth />
+          </div>
 
-      <form className="form" onSubmit={handleSubmit}>
-        <p className="input-box">
-          <label htmlFor="email">E-Mail</label>
-          {error?.email && <span className="error">{error.email}</span>}
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className={error?.email ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <p className="input-box">
-          <label htmlFor="username">Username</label>
-          {error?.username && <span className="error">{error.username}</span>}
-          <input
-            type="text"
-            name="username"
-            id="username"
-            className={error?.username ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <p className="input-box">
-          <label htmlFor="password">Password</label>
-          {error?.password && <span className="error">{error.password}</span>}
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className={error?.password ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <p className="input-box">
-          <label htmlFor="repass">Confirm Password</label>
-          {error?.repass && <span className="error">{error.repass}</span>}
-          <input
-            type="password"
-            name="repass"
-            id="repass"
-            className={error?.repass ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <div className="form-actions">
-          <button disabled={loading} type="submit" className="btn-1 auth-btn">
-            {loading ? "Loading..." : "Create Account"}
-          </button>
-          <Oauth />
-        </div>
-
-        <p className="btn-2 auth">
-          <Link to="/login">Login instead</Link>
-          <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />
-        </p>
-      </form>
+          <p className="btn-2 auth">
+            <Link to="/login">Login instead</Link>
+            <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />
+          </p>
+        </form>
+      </div>
     </>
   );
 };

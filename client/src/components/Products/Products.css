@@ -1,7 +1,3 @@
-.products-container {
-    margin-top: 8rem;
-}
-
 .product-list {
     display: flex;
     flex-direction: column;

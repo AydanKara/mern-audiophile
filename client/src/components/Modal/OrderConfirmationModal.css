@@ -126,3 +126,19 @@
     font-size: 1.8rem;
     font-weight: bold;
 }
+
+@media (max-width: 375px) {
+    .order-summary-container {
+        flex-direction: column;
+    }
+
+    .order-details {
+        width: 100%;
+        overflow: overlay;
+    }
+
+    .grand-total-container {
+        width: 100%;
+        padding: 2rem 0 2.2rem 3.3rem;
+    }
+}

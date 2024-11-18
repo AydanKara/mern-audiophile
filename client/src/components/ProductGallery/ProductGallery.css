@@ -31,3 +31,26 @@
         margin-top: 12rem;
     }
 }
+
+@media (max-width: 600px) {
+    .product-gallery {
+        grid-template-areas:
+            "first first"
+            "second second"
+            "third third";
+    }
+}
+
+@media (max-width: 480px) {
+    .first {
+        height: 27.4rem;
+    }
+    
+    .second {
+        height: 27.4rem;
+    }
+    
+    .third {
+        height: 36.8rem;
+    }
+}

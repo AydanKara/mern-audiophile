@@ -61,17 +61,16 @@ const CartModalContent = ({ cartItems, totalPrice, toggleCart }) => {
               </div>
             </li>
           ))}
-
-          <div className="total">
-            <p>TOTAL</p>
-            <span className="total-price">
-              $ {totalPrice.toLocaleString("en")}
-            </span>
-          </div>
-          <Link to={"/checkout"} onClick={toggleCart} className="btn-1">
-            Checkout
-          </Link>
         </ul>
+        <div className="total">
+          <p>TOTAL</p>
+          <span className="total-price">
+            $ {totalPrice.toLocaleString("en")}
+          </span>
+        </div>
+        <Link to={"/checkout"} onClick={toggleCart} className="btn-1">
+          Checkout
+        </Link>
       </div>
       <div className="cart-modal-overlay" onClick={toggleCart}></div>
     </div>

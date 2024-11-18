@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 const ProductItem = ({ product, isReversed }) => {
   const [isReversedActive, setIsReversedActive] = useState(() => {
     // Initial state check for window size
-    return window.innerWidth > 768 ? isReversed : false;
+    return window.innerWidth > 992 ? isReversed : false;
   });
 
   useEffect(() => {
     const handleResize = () => {
       // Automatically runs when the component re-renders due to state change
-      setIsReversedActive(window.innerWidth > 768 ? isReversed : false);
+      setIsReversedActive(window.innerWidth > 992 ? isReversed : false);
     };
 
     handleResize(); // Run the check on component mount
@@ -33,7 +33,7 @@ const ProductItem = ({ product, isReversed }) => {
           {isReversedActive ? (
             <>
               <div className="col-2">
-                <div className={`product-info padding-right`}>
+                <div className={`product-info margin-unset`}>
                   <h2>{product.name}</h2>
                   <p className="product-desc">{product.description}</p>
                   <Link to={`/product/${product._id}`} className="btn-1">

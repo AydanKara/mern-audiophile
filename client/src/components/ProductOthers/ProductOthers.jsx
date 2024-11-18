@@ -42,7 +42,11 @@ const ProductOthers = ({ excludeProductId }) => {
           {randomProducts.map((product) => (
             <li className="other-item" key={product._id}>
               <div className="other-img">
-                <img src={product.image} alt={product.name} />
+                <img
+                  src={product.image}
+                  srcSet={`${product.imageTablet} 768w`}
+                  alt={product.name}
+                />
               </div>
               <h5>{product.name}</h5>
               <Link to={`/product/${product._id}`} className="btn-1">

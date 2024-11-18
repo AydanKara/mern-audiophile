@@ -12,7 +12,7 @@ const Footer = () => {
               <img src="/shared/logo.svg" alt="" />
             </Link>
             <nav>
-              <ul id="nav-list">
+              <ul className="nav-list">
                 <li className="nav-item">
                   <Link to={"/"}>HOME</Link>
                 </li>

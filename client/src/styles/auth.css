@@ -1,21 +1,3 @@
-.site-heading {
-    width: 100%;
-    height: 23.9rem;
-    background-color: var(--color-black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.site-heading .heading-title {
-    color: var(--color-white);
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 4.4rem;
-    letter-spacing: 1.429px;
-    text-transform: uppercase;
-}
-
 .form {
     max-width: 54rem;
     margin: 10rem auto;
@@ -38,4 +20,11 @@
 .btn-2:hover a {
     color: var(--color-orange);
     opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .form {
+        margin: 6rem auto;
+        padding: 2rem;
+    }
 }

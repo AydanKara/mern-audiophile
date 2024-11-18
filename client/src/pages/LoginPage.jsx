@@ -85,42 +85,43 @@ const LoginPage = () => {
       <div className="site-heading">
         <h1 className="heading-title">Login</h1>
       </div>
+      <div className="container">
+        <form className="form" onSubmit={handleSubmit}>
+          <p>
+            <label htmlFor="email">E-Mail</label>
+            {error?.email && <span className="error">{error.email}</span>}
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className={error?.email ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="password">Password</label>
+            {error?.password && <span className="error">{error.password}</span>}
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className={error?.password ? "error-input" : ""}
+              onChange={handleChange}
+            />
+          </p>
+          <div className="form-actions">
+            <button type="submit" className="btn-1 auth-btn">
+              {loading ? "Loading..." : "Login"}
+            </button>
+            <Oauth />
+          </div>
 
-      <form className="form" onSubmit={handleSubmit}>
-        <p>
-          <label htmlFor="email">E-Mail</label>
-          {error?.email && <span className="error">{error.email}</span>}
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className={error?.email ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="password">Password</label>
-          {error?.password && <span className="error">{error.password}</span>}
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className={error?.password ? "error-input" : ""}
-            onChange={handleChange}
-          />
-        </p>
-        <div className="form-actions">
-          <button type="submit" className="btn-1 auth-btn">
-            {loading ? "Loading..." : "Login"}
-          </button>
-          <Oauth />
-        </div>
-
-        <p className="btn-2 auth">
-          <Link to="/register">Create a new user</Link>
-          <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />
-        </p>
-      </form>
+          <p className="btn-2 auth">
+            <Link to="/register">Create a new user</Link>
+            <img src="shared/icon-arrow-right.svg" alt="icon-arrow-right" />
+          </p>
+        </form>
+      </div>
     </>
   );
 };

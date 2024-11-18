@@ -41,3 +41,21 @@
         margin-top: 12rem;
     }
 }
+
+@media (max-width: 600px) {
+    .product-others .others-list {
+        flex-direction: column;
+        gap: 5.6rem;
+    }
+
+    .other-item .other-img {
+        max-width: 32.7rem;
+        height: 14.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .other-item .other-img {
+        height: 12rem;
+    }
+}

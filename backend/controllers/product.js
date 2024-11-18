@@ -41,6 +41,8 @@ export const getRandomProducts = async (req, res, next) => {
           // Only include the required fields
           name: 1,
           image: 1,
+          imageTablet: 1,
+          imageMobile: 1,
           _id: 1,
         },
       },

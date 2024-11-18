@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import ProductItem from "../../Products/ProductItem/ProductItem";
+import "./CategoryProducts.css";
 
 const CategoryProducts = ({ products }) => {
   return (

@@ -39,7 +39,7 @@
 
 /* responsive */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .shop-info {
         margin-bottom: 9.6rem;
     }

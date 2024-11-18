@@ -19,3 +19,13 @@
 #shop-info {
     margin-bottom: 16rem;
 }
+
+@media (max-width: 480px) {
+    .category-heading {
+        height: 10rem;
+    }
+
+    .heading-title {
+        font-size: 2.8rem;
+    }
+}

@@ -30,16 +30,14 @@ const Categories = ({ closeMenu }) => {
   return (
     <Spin spinning={loading} size="large">
       <section className="products-categories">
-        <div className="container">
-          <div className="products-categories-wrapper">
-            {dataSource.map((category) => (
-              <CategoryItem
-                key={category._id}
-                {...category}
-                closeMenu={closeMenu}
-              />
-            ))}
-          </div>
+        <div className="products-categories-wrapper">
+          {dataSource.map((category) => (
+            <CategoryItem
+              key={category._id}
+              {...category}
+              closeMenu={closeMenu}
+            />
+          ))}
         </div>
       </section>
     </Spin>
