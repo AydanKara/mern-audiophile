@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem/CategoryItem";
 import { message, Spin } from "antd";
 import "./Categories.css";
+import MusicEqualizer from "../MusicEqualizer/MusicEqualizer";
 
 const Categories = ({ closeMenu }) => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -28,7 +29,7 @@ const Categories = ({ closeMenu }) => {
     fetchCategories();
   }, [fetchCategories]);
   return (
-    <Spin spinning={loading} size="large">
+    <Spin spinning={loading} indicator={<MusicEqualizer />} size="large">
       <section className="products-categories">
         <div className="products-categories-wrapper">
           {dataSource.map((category) => (

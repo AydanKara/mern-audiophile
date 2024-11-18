@@ -2,6 +2,11 @@
     margin: 15.4rem 0 16.8rem 0;
 }
 
+.ant-spin-nested-loading>div>.ant-spin {
+    width: fit-content;
+    inset-inline-start: 50%;
+}
+
 .ant-spin-dot.ant-spin-dot-spin {
     color: var(--color-orange) !important;
 }
@@ -11,4 +16,3 @@
         margin: 18rem 0 10rem 0;
     }
 }
-

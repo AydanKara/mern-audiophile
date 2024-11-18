@@ -1,0 +1,50 @@
+.music-equalizer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 30px;
+    /* Adjust the width as needed */
+}
+
+.bar {
+    width: 5px;
+    /* Adjust the width of each bar */
+    height: 25px;
+    /* Initial height */
+    background-color: var(--color-orange);
+    /* Change to your desired color */
+    animation: bounce 1s infinite ease-in-out;
+    margin: 0 1px;
+}
+
+.bar:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.bar:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scaleY(0.3);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
