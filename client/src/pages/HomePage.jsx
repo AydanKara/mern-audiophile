@@ -8,7 +8,9 @@ const HomePage = () => {
   return (
     <main>
       <Hero />
-      <Categories />
+      <div className="container">
+        <Categories />
+      </div>
       <FeaturedProducts />
       <ShopInfo />
     </main>

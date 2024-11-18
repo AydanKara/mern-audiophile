@@ -155,11 +155,9 @@ const ProductDetailsPage = () => {
       <section className="container">
         <ProductOthers excludeProductId={dataSource._id} />
       </section>
-      <section className="products-categories">
-        <div className="container">
-          <Categories />
-        </div>
-      </section>
+      <div className="container">
+        <Categories />
+      </div>
       <ShopInfo />
       {/* <li className="comment-write">
                       <h3>write a comment:</h3>

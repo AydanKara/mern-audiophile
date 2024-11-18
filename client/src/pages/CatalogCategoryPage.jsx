@@ -40,7 +40,9 @@ const CatalogCategoryPage = () => {
           <h1 className="heading-title">{categoryTitle}</h1>
         </div>
         <CategoryProducts products={products} />
-        <Categories />
+        <div className="container">
+          <Categories />
+        </div>
       </Spin>
       <ShopInfo />
     </main>
